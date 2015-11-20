@@ -1,3 +1,4 @@
+package fr.unantes.uima.mauilibrary.writer;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class TopicWritter extends JCasAnnotator_ImplBase{
+public class TopicWriter extends JCasAnnotator_ImplBase{
 		private List<String> stringbuffer;
 		public static final String pathfile = "resourceDestFilename";
 		@ConfigurationParameter(name = pathfile, mandatory = true, defaultValue="/tmp/wordcounter.csv")

@@ -32,22 +32,76 @@ public class ModelBuilderUIMA extends JCasAnnotator_ImplBase {
 	// PARAMETERS
 	// -------------------------------
 	
-	//@ConfigurationParameter(name = PARAM_INPUT_FILE, mandatory = true)
+	public static final String INPUT_DIRECTORY_NAME = "INPUT_DIRECTORY_NAME";
+	@ConfigurationParameter(name = INPUT_DIRECTORY_NAME,
+			description = "directory of train documents",
+			mandatory = true)
 	private String inputDirectoryName;
+	
+	public static final String MODEL_NAME = "MODEL_NAME";
+	@ConfigurationParameter(name = MODEL_NAME,
+			description = "model name",
+			mandatory = true)
 	private String modelName;
+	
+	public static final String VOCABULARY_FORMAT = "VOCABULARY_FORMAT";
+	@ConfigurationParameter(name = VOCABULARY_FORMAT,
+			mandatory = true)
 	private String vocabularyFormat;
+	
+	public static final String VOCABULARY_NAME = "VOCABULARY_NAME";
+	@ConfigurationParameter(name = VOCABULARY_NAME,
+			mandatory = true)
 	private String vocabularyName;
+	
+	public static final String DOCUMENT_LANGUAGE = "DOCUMENT_LANGUAGE";
+	@ConfigurationParameter(name = DOCUMENT_LANGUAGE,
+			mandatory = false, defaultValue = "en")
 	private String documentLanguage;
+	
+	public static final String DOCUMENT_ENCODING = "DOCUMENT_ENCODING";
+	@ConfigurationParameter(name = DOCUMENT_ENCODING,
+			mandatory = false, defaultValue = "UTF-8")
 	private String documentEncoding;
+	
+	public static final String SERIALIZE = "SERIALIZE";
+	@ConfigurationParameter(name = SERIALIZE,
+			mandatory = false, defaultValue = "true")
 	private Boolean serialize = true;
-	//@ConfigurationParameter(name = PARAM_INPUT_FILE, mandatory = true)
+	
+	public static final String BASIC_FEATURES = "BASIC_FEATURES";
+	@ConfigurationParameter(name = BASIC_FEATURES,
+			mandatory = true)
 	private Boolean basicFeatures; //(true);
+	
+	public static final String KEYPHRASENESS_FEATURE = "KEYPHRASENESS_FEATURE";
+	@ConfigurationParameter(name = KEYPHRASENESS_FEATURE,
+			mandatory = true)
 	private Boolean keyphrasenessFeature; //(true);
+	
+	public static final String FREQUENCYFEATURES = "LANGUAGE";
+	@ConfigurationParameter(name = PARAM_LANGUAGE,
+			mandatory = false, defaultValue = "en")
 	private Boolean frequencyFeatures; //(false);
+	
+	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	@ConfigurationParameter(name = PARAM_LANGUAGE,
+			mandatory = false, defaultValue = "en")
 	private Boolean positionsFeatures; //(true);
+	
+	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	@ConfigurationParameter(name = PARAM_LANGUAGE,
+			mandatory = false, defaultValue = "en")
 	private Boolean lengthFeature; //(true);
+	
+	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	@ConfigurationParameter(name = PARAM_LANGUAGE,
+			mandatory = false, defaultValue = "en")
 	private Boolean thesaurusFeatures; //(true);
 	
+	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	@ConfigurationParameter(name = PARAM_LANGUAGE,
+			mandatory = false, defaultValue = "en")
 	private Boolean saveModel; //(true); Ajout      
 	
 	// -------------------------------
