@@ -1,0 +1,1 @@
+classpath*:resourceManagement/types/CommonTS.xml
