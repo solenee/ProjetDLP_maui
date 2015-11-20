@@ -1,6 +1,7 @@
 package fr.unantes.uima.mauilibrary.nativeTests;
 
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 
@@ -32,7 +33,7 @@ import fr.unantes.uima.mauilibrary.resource.StopWordsResource_MauiImpl;
  */
 public class FrenchExampleTest {
 
-	//@Test
+	@Test
 	public void testFrench() throws Exception {
 		
 		// location of the data
@@ -47,15 +48,14 @@ public class FrenchExampleTest {
 		
 		// UIMA :  Stopwords resource
 		ExternalResourceDescription stopWordsResourceDesc =
-				createExternalResourceDescription(StopWordsResource_MauiImpl.class,
-						StopWordsResource_MauiImpl.PARAM_LANGUAGE, language);
-		Stopwords stopwords = new StopwordsFrench(); //->
+				createExternalResourceDescription(StopWordsResource_MauiImpl.class, "xx");//,					StopWordsResource_MauiImpl.PARAM_LANGUAGE, language);
+//		Stopwords stopwords = new StopwordsFrench(); //->
 		
 		// UIMA : Stemmer resource
 		ExternalResourceDescription stemmerResourceDesc =
-				createExternalResourceDescription(StemmerResource_MauiImpl.class,
+				createExternalResourceDescription(StemmerResource_MauiImpl.class,"xx",
 						StemmerResource_MauiImpl.PARAM_LANGUAGE, language);
-		Stemmer stemmer = new FrenchStemmer(); //->
+//		Stemmer stemmer = new FrenchStemmer(); //->
 		
 		// document encoding
 		String encoding = "UTF-8";
@@ -65,11 +65,11 @@ public class FrenchExampleTest {
 		String format = "skos";
 		
 		// how many topics per document to extract
-		int numTopicsToExtract = 8;
+//		int numTopicsToExtract = 8; TODO Find a way to add this parameter
 		
 		// maui objects
-		MauiModelBuilder modelBuilder = new MauiModelBuilder();
-		MauiTopicExtractor topicExtractor = new MauiTopicExtractor();
+//		MauiModelBuilder modelBuilder = new MauiModelBuilder();
+		/* MauiTopicExtractor topicExtractor = new MauiTopicExtractor(); */
 		
 		// Settings for the model builder
 //		modelBuilder.inputDirectoryName = trainDir;
@@ -80,9 +80,10 @@ public class FrenchExampleTest {
 //		modelBuilder.stopwords = stopwords;
 //		modelBuilder.documentLanguage = language;
 //		modelBuilder.documentEncoding = encoding;
-//		modelBuilder.serialize = true;
+		Boolean serialize = true;
 		
 		// Which features to use?
+		Boolean basicFeatures = true;
 		Boolean keyphrasenessFeature = true;
 		Boolean frequencyFeatures = false;  
 		Boolean positionsFeatures = true;   
@@ -98,11 +99,30 @@ public class FrenchExampleTest {
 		// Run model builder
 //		MauiFilter filter = modelBuilder.buildModel(DataLoader.loadTestDocuments(trainDir));
 //		modelBuilder.saveModel(filter);
+		Boolean saveModel = true;
+		
 		// UIMA : Run in UIMA pipeline
 		CollectionReader reader = createReader(
 	                DocumentsReader.class,  DocumentsReader.PARAM_DIRECTORY_NAME, trainDir 
 	        );
-		AnalysisEngine uimaModelBuilder = createEngine(ModelBuilderUIMA.class);
+		AnalysisEngine uimaModelBuilder = createEngine(ModelBuilderUIMA.class, 
+				ModelBuilderUIMA.INPUT_DIRECTORY_NAME,trainDir,
+				ModelBuilderUIMA.MODEL_NAME,modelName,
+				ModelBuilderUIMA.VOCABULARY_FORMAT,format,
+				ModelBuilderUIMA.VOCABULARY_NAME, vocabulary,
+				ModelBuilderUIMA.DOCUMENT_LANGUAGE, language,
+				ModelBuilderUIMA.DOCUMENT_ENCODING, encoding,
+				ModelBuilderUIMA.SERIALIZE,serialize,
+				ModelBuilderUIMA.BASIC_FEATURES, basicFeatures,
+				ModelBuilderUIMA.KEYPHRASENESS_FEATURE,keyphrasenessFeature,
+				ModelBuilderUIMA.FREQUENCY_FEATURES,frequencyFeatures,
+				ModelBuilderUIMA.POSITIONS_FEATURES,positionsFeatures,
+				ModelBuilderUIMA.LENGTH_FEATURE,lengthFeature,
+				ModelBuilderUIMA.THESAURUS_FEATURES,thesaurusFeatures,
+				ModelBuilderUIMA.SAVE_MODEL,saveModel,
+				ModelBuilderUIMA.RES_STOPWORDS,stopWordsResourceDesc,
+				ModelBuilderUIMA.RES_STEMMER, stemmerResourceDesc
+				);
 		
 		SimplePipeline.runPipeline(
         		reader,

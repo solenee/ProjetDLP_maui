@@ -16,4 +16,6 @@ public interface StopWordsResource {
 	
 	/** Obtain Maui Stopwords object */
 	public Stopwords getMauiStopwords();
+	
+	public void setLanguage(String language);
 }

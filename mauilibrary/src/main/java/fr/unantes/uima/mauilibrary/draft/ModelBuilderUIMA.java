@@ -1,5 +1,10 @@
 package fr.unantes.uima.mauilibrary.draft;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -15,6 +20,7 @@ import com.entopix.maui.filters.MauiFilter;
 import com.entopix.maui.filters.MauiFilter.MauiFilterException;
 import com.entopix.maui.main.MauiModelBuilder;
 import com.entopix.maui.util.DataLoader;
+import com.entopix.maui.util.MauiDocument;
 
 import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
@@ -79,29 +85,29 @@ public class ModelBuilderUIMA extends JCasAnnotator_ImplBase {
 			mandatory = true)
 	private Boolean keyphrasenessFeature; //(true);
 	
-	public static final String FREQUENCYFEATURES = "LANGUAGE";
-	@ConfigurationParameter(name = PARAM_LANGUAGE,
+	public static final String FREQUENCY_FEATURES = "FREQUENCY_FEATURES";
+	@ConfigurationParameter(name = FREQUENCY_FEATURES,
 			mandatory = false, defaultValue = "en")
 	private Boolean frequencyFeatures; //(false);
 	
-	public static final String PARAM_LANGUAGE = "LANGUAGE";
-	@ConfigurationParameter(name = PARAM_LANGUAGE,
-			mandatory = false, defaultValue = "en")
+	public static final String POSITIONS_FEATURES = "POSITIONS_FEATURES";
+	@ConfigurationParameter(name = POSITIONS_FEATURES,
+			mandatory = true)
 	private Boolean positionsFeatures; //(true);
 	
-	public static final String PARAM_LANGUAGE = "LANGUAGE";
-	@ConfigurationParameter(name = PARAM_LANGUAGE,
-			mandatory = false, defaultValue = "en")
+	public static final String LENGTH_FEATURE = "LENGTH_FEATURE";
+	@ConfigurationParameter(name = LENGTH_FEATURE,
+			mandatory = true)
 	private Boolean lengthFeature; //(true);
 	
-	public static final String PARAM_LANGUAGE = "LANGUAGE";
-	@ConfigurationParameter(name = PARAM_LANGUAGE,
-			mandatory = false, defaultValue = "en")
+	public static final String THESAURUS_FEATURES = "THESAURUS_FEATURES";
+	@ConfigurationParameter(name = THESAURUS_FEATURES,
+			mandatory = true)
 	private Boolean thesaurusFeatures; //(true);
 	
-	public static final String PARAM_LANGUAGE = "LANGUAGE";
-	@ConfigurationParameter(name = PARAM_LANGUAGE,
-			mandatory = false, defaultValue = "en")
+	public static final String SAVE_MODEL = "SAVE_MODEL";
+	@ConfigurationParameter(name = SAVE_MODEL,
+			mandatory = true)
 	private Boolean saveModel; //(true); Ajout      
 	
 	// -------------------------------
@@ -118,12 +124,21 @@ public class ModelBuilderUIMA extends JCasAnnotator_ImplBase {
 	@ExternalResource(key = RES_STEMMER)
 	private StemmerResource_MauiImpl stemmer;
 	
+	// -------------------------------
+	// OTHER ATTRIBUTES
+	// -------------------------------
 	private MauiModelBuilder mauiModelBuilder;
+	
+	private List<MauiDocument> documents;
 	
 	@Override
 	public void initialize(UimaContext context)
 			throws ResourceInitializationException {
 		super.initialize(context);
+		
+		documents = new ArrayList<MauiDocument>();
+		
+		mauiModelBuilder = new MauiModelBuilder();
 		mauiModelBuilder.inputDirectoryName = inputDirectoryName;
 		mauiModelBuilder.modelName = modelName;
 		mauiModelBuilder.vocabularyFormat = vocabularyFormat;
@@ -136,13 +151,23 @@ public class ModelBuilderUIMA extends JCasAnnotator_ImplBase {
 		mauiModelBuilder.setLengthFeature(lengthFeature);
 		mauiModelBuilder.setThesaurusFeatures(thesaurusFeatures);
 		
+		stemmer.setLanguage(documentLanguage);
 		mauiModelBuilder.stemmer = stemmer.getMauiStemmer(); 
+		
+		stopwords.setLanguage(documentLanguage);
 		mauiModelBuilder.stopwords = stopwords.getMauiStopwords(); 
 	}
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-		// TODO
+		//TODO
+		//File keyFile = new File(file.getAbsoluteFile().toString().replace(".txt", ".key"));
+		//String manualTopics = "";
+		//if (keyFile.exists()) {
+		//	manualTopics = FileUtils.readFileToString(keyFile);
+		//}
+		// new MauiDocument(file.getName(), file.getAbsolutePath(), textContent, manualTopics);
+		
 		logger.log(Level.WARNING, "Sorry! Not yet implemented");
 	}
 	

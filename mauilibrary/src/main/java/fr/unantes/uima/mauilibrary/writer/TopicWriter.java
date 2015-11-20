@@ -15,8 +15,8 @@ import java.util.List;
 
 public class TopicWriter extends JCasAnnotator_ImplBase{
 		private List<String> stringbuffer;
-		public static final String pathfile = "resourceDestFilename";
-		@ConfigurationParameter(name = pathfile, mandatory = true, defaultValue="/tmp/wordcounter.csv")
+		public static final String PATH_FILE = "resourceDestFilename";
+		@ConfigurationParameter(name = PATH_FILE, mandatory = true, defaultValue="/tmp/wordcounter.csv")
 		private String resourceDestFilename;
 	
 		@Override

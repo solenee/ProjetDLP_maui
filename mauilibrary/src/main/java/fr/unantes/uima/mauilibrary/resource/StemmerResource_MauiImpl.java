@@ -1,9 +1,12 @@
 package fr.unantes.uima.mauilibrary.resource;
 
+import org.apache.uima.UIMAFramework;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.DataResource;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.SharedResourceObject;
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 
 import com.entopix.maui.stemmers.FrenchStemmer;
 import com.entopix.maui.stemmers.GermanStemmer;
@@ -14,6 +17,8 @@ import com.entopix.maui.stemmers.Stemmer;
 
 public class StemmerResource_MauiImpl implements StemmerResource, SharedResourceObject{
 
+	Logger logger = UIMAFramework.getLogger(StemmerResource_MauiImpl.class);
+	
 	public static final String PARAM_LANGUAGE = "LANGUAGE";
 	@ConfigurationParameter(name = PARAM_LANGUAGE,
 			description = "default language for the text",
@@ -24,18 +29,9 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 	private Stemmer mauiStemmer;
 	
 	public void load(DataResource aData) throws ResourceInitializationException {
-		// TODO Auto-generated method stub
-		if (language.equals("en")) {
-			mauiStemmer = new PorterStemmer();
-		} else if (language.equals("fr")) {
-			mauiStemmer = new FrenchStemmer();
-		} else if (language.equals("es")) {
-			mauiStemmer = new SpanishStemmer();
-		} else if (language.equals("de")) {
-			mauiStemmer = new GermanStemmer();
-		} else {
-			mauiStemmer = new NoStemmer();
-		}
+		logger.log(Level.INFO, "language == "+language);
+		logger.log(Level.INFO, aData.toString());
+		initStemmer();
 	}
 
 	public String stem(String str) {
@@ -47,7 +43,31 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 	 * @return mauiStemmer
 	 */
 	public Stemmer getMauiStemmer() {
+		if (mauiStemmer == null) {
+			initStemmer();
+		}
 		return mauiStemmer;
+	}
+	
+	private void initStemmer() {
+		if ( (mauiStemmer == null) && !(language == null) ) {
+			if (language.equals("en")) {
+				mauiStemmer = new PorterStemmer();
+			} else if (language.equals("fr")) {
+				mauiStemmer = new FrenchStemmer();
+			} else if (language.equals("es")) {
+				mauiStemmer = new SpanishStemmer();
+			} else if (language.equals("de")) {
+				mauiStemmer = new GermanStemmer();
+			} else {
+				mauiStemmer = new NoStemmer();
+			}
+		}
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+		
 	}
 
 }

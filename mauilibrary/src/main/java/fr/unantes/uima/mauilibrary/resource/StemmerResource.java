@@ -15,4 +15,6 @@ public interface StemmerResource {
 	 */
 	public String stem(String str); 
 	
+	public void setLanguage(String language);
+	
 }
