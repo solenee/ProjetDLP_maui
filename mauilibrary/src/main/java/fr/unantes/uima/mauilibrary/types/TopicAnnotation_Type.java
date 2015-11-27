@@ -1,6 +1,6 @@
 
-/* First created by JCasGen Fri Nov 20 16:45:56 CET 2015 */
-package fr.nantes.uima.mauilibrary.types;
+/* First created by JCasGen Fri Nov 20 17:47:37 CET 2015 */
+package fr.unantes.uima.mauilibrary.types;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Nov 20 16:45:56 CET 2015
+ * Updated by JCasGen Fri Nov 20 19:18:00 CET 2015
  * @generated */
 public class TopicAnnotation_Type extends Annotation_Type {
   /** @generated 
@@ -44,29 +44,29 @@ public class TopicAnnotation_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("fr.nantes.uima.mauilibrary.types.TopicAnnotation");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("fr.unantes.uima.mauilibrary.types.TopicAnnotation");
  
   /** @generated */
-  final Feature casFeat_Value;
+  final Feature casFeat_Text;
   /** @generated */
-  final int     casFeatCode_Value;
+  final int     casFeatCode_Text;
   /** @generated
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
-  public String getValue(int addr) {
-        if (featOkTst && casFeat_Value == null)
-      jcas.throwFeatMissing("Value", "fr.nantes.uima.mauilibrary.types.TopicAnnotation");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_Value);
+  public String getText(int addr) {
+        if (featOkTst && casFeat_Text == null)
+      jcas.throwFeatMissing("Text", "fr.unantes.uima.mauilibrary.types.TopicAnnotation");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_Text);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
-  public void setValue(int addr, String v) {
-        if (featOkTst && casFeat_Value == null)
-      jcas.throwFeatMissing("Value", "fr.nantes.uima.mauilibrary.types.TopicAnnotation");
-    ll_cas.ll_setStringValue(addr, casFeatCode_Value, v);}
+  public void setText(int addr, String v) {
+        if (featOkTst && casFeat_Text == null)
+      jcas.throwFeatMissing("Text", "fr.unantes.uima.mauilibrary.types.TopicAnnotation");
+    ll_cas.ll_setStringValue(addr, casFeatCode_Text, v);}
     
   
  
@@ -80,7 +80,7 @@ public class TopicAnnotation_Type extends Annotation_Type {
    */ 
   public double getScore(int addr) {
         if (featOkTst && casFeat_Score == null)
-      jcas.throwFeatMissing("Score", "fr.nantes.uima.mauilibrary.types.TopicAnnotation");
+      jcas.throwFeatMissing("Score", "fr.unantes.uima.mauilibrary.types.TopicAnnotation");
     return ll_cas.ll_getDoubleValue(addr, casFeatCode_Score);
   }
   /** @generated
@@ -89,7 +89,7 @@ public class TopicAnnotation_Type extends Annotation_Type {
    */    
   public void setScore(int addr, double v) {
         if (featOkTst && casFeat_Score == null)
-      jcas.throwFeatMissing("Score", "fr.nantes.uima.mauilibrary.types.TopicAnnotation");
+      jcas.throwFeatMissing("Score", "fr.unantes.uima.mauilibrary.types.TopicAnnotation");
     ll_cas.ll_setDoubleValue(addr, casFeatCode_Score, v);}
     
   
@@ -106,8 +106,8 @@ public class TopicAnnotation_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_Value = jcas.getRequiredFeatureDE(casType, "Value", "uima.cas.String", featOkTst);
-    casFeatCode_Value  = (null == casFeat_Value) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Value).getCode();
+    casFeat_Text = jcas.getRequiredFeatureDE(casType, "Text", "uima.cas.String", featOkTst);
+    casFeatCode_Text  = (null == casFeat_Text) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Text).getCode();
 
  
     casFeat_Score = jcas.getRequiredFeatureDE(casType, "Score", "uima.cas.Double", featOkTst);

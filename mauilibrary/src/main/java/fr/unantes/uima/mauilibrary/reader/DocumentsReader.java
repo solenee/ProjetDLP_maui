@@ -6,21 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.uima.UIMAFramework;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
+import fr.unantes.uima.mauilibrary.types.FileDescription;
+import fr.unantes.uima.mauilibrary.types.ManualTopic;
+
 /**
+ * TODO : Index nbDocuments somehow : in MauiFilter resource
+ * Note : The model is just a serialized version of MauiFilter object (version Maui)
  * Collection reader for loading all txt files of a given directory
+ * It also add the following pieces of information : FileDescription, ManualTopics 
+ * Maui : Refactoring of DataLoader
  * @author solenee
  *
  */
 public class DocumentsReader extends JCasCollectionReader_ImplBase {
+
+	Logger logger = UIMAFramework.getLogger(DocumentsReader.class);
 
 	public static final String PARAM_DIRECTORY_NAME = "DirectoryName";
 	@ConfigurationParameter(name = PARAM_DIRECTORY_NAME,
@@ -52,11 +64,43 @@ public class DocumentsReader extends JCasCollectionReader_ImplBase {
 	}
 
 	@Override
-	public void getNext(JCas j) throws IOException, CollectionException {
+	public void getNext(JCas jcas) throws IOException, CollectionException {
 		File f = documents.get(i);
 		String s = FileUtils.readFileToString(f);
-		j.setDocumentText(s);
+		jcas.setDocumentText(s);
+		// Initialize FileDescription
+		FileDescription fDesc = new FileDescription(jcas);
+		fDesc.setAbsolutePath(f.getAbsolutePath());
+		fDesc.setFileName(f.getName());
+		fDesc.setId(i);
+		fDesc.addToIndexes();
 		i++;
+		
+		// Initialize ManualTopics
+		indexManualTopics(f.getAbsolutePath().replace(".txt", ".key"), jcas);
+	}
+
+	private void indexManualTopics(String keyFileAbsolutePath, JCas jcas) {
+		if (keyFileAbsolutePath.endsWith(".txt")) {
+			try {
+				File keyFile = new File(keyFileAbsolutePath);
+				if (keyFile.exists()) {
+					String manualTopics = FileUtils.readFileToString(keyFile);
+					for (String mTopic : manualTopics.split("\n")) {
+						if (mTopic.length() > 1) {
+							ManualTopic topic = new ManualTopic(jcas);
+							topic.setAbsolutePath(keyFileAbsolutePath);
+							topic.setTopic(mTopic);
+							topic.addToIndexes();
+						}
+					}
+					
+				}
+			} catch (IOException e) {
+				logger.log(Level.ALL, "Error while loading .key documents: " + e.getMessage());
+				throw new RuntimeException();
+			}
+		}
 	}
 
 }

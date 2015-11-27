@@ -1,7 +1,7 @@
 
 
-/* First created by JCasGen Fri Nov 20 16:48:46 CET 2015 */
-package fr.nantes.uima.mauilibrary.types;
+/* First created by JCasGen Fri Nov 20 17:47:30 CET 2015 */
+package fr.unantes.uima.mauilibrary.types;
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Nov 20 16:48:46 CET 2015
+ * Updated by JCasGen Fri Nov 20 17:47:30 CET 2015
  * XML source: /comptes/E15D861C/Cours_ATAL/ProjetDLP_maui/mauilibrary/desc/types/CandidateAnnotation.xml
  * @generated */
 public class CandidateAnnotation extends Annotation {
@@ -85,7 +85,7 @@ public class CandidateAnnotation extends Annotation {
    */
   public double getFrequency() {
     if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Frequency == null)
-      jcasType.jcas.throwFeatMissing("Frequency", "fr.nantes.uima.mauilibrary.types.CandidateAnnotation");
+      jcasType.jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
     return jcasType.ll_cas.ll_getDoubleValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Frequency);}
     
   /** setter for Frequency - sets  
@@ -94,7 +94,7 @@ public class CandidateAnnotation extends Annotation {
    */
   public void setFrequency(double v) {
     if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Frequency == null)
-      jcasType.jcas.throwFeatMissing("Frequency", "fr.nantes.uima.mauilibrary.types.CandidateAnnotation");
+      jcasType.jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
     jcasType.ll_cas.ll_setDoubleValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Frequency, v);}    
   }
 

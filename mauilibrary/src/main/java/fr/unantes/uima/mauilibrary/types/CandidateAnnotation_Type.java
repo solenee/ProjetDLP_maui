@@ -1,6 +1,6 @@
 
-/* First created by JCasGen Fri Nov 20 16:48:46 CET 2015 */
-package fr.nantes.uima.mauilibrary.types;
+/* First created by JCasGen Fri Nov 20 17:47:30 CET 2015 */
+package fr.unantes.uima.mauilibrary.types;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Nov 20 16:48:46 CET 2015
+ * Updated by JCasGen Fri Nov 20 17:47:30 CET 2015
  * @generated */
 public class CandidateAnnotation_Type extends Annotation_Type {
   /** @generated 
@@ -44,7 +44,7 @@ public class CandidateAnnotation_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("fr.nantes.uima.mauilibrary.types.CandidateAnnotation");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
  
   /** @generated */
   final Feature casFeat_Frequency;
@@ -56,7 +56,7 @@ public class CandidateAnnotation_Type extends Annotation_Type {
    */ 
   public double getFrequency(int addr) {
         if (featOkTst && casFeat_Frequency == null)
-      jcas.throwFeatMissing("Frequency", "fr.nantes.uima.mauilibrary.types.CandidateAnnotation");
+      jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
     return ll_cas.ll_getDoubleValue(addr, casFeatCode_Frequency);
   }
   /** @generated
@@ -65,7 +65,7 @@ public class CandidateAnnotation_Type extends Annotation_Type {
    */    
   public void setFrequency(int addr, double v) {
         if (featOkTst && casFeat_Frequency == null)
-      jcas.throwFeatMissing("Frequency", "fr.nantes.uima.mauilibrary.types.CandidateAnnotation");
+      jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
     ll_cas.ll_setDoubleValue(addr, casFeatCode_Frequency, v);}
     
   

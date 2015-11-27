@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>TopicAnnotation</name>
+  <name>ManualTopic</name>
   <description/>
   <version>1.0</version>
   <vendor/>
   <types>
     <typeDescription>
-      <name>fr.unantes.uima.mauilibrary.types.TopicAnnotation</name>
-      <description/>
+      <name>fr.unantes.uima.mauilibrary.types.ManualTopic</name>
+      <description>Manual topic stored in .key file</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>Text</name>
+          <name>FileName</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
         <featureDescription>
-          <name>Score</name>
+          <name>AbsolutePath</name>
           <description/>
-          <rangeTypeName>uima.cas.Double</rangeTypeName>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
+      <featureDescription>
+          <name>Topic</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+          </featureDescription>
       </features>
     </typeDescription>
   </types>

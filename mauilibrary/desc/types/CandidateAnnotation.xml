@@ -6,7 +6,7 @@
   <vendor/>
   <types>
     <typeDescription>
-      <name>fr.nantes.uima.mauilibrary.types.CandidateAnnotation</name>
+      <name>fr.unantes.uima.mauilibrary.types.CandidateAnnotation</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
