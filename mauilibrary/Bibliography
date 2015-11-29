@@ -1,0 +1,16 @@
+- Documentation weka.Filter : http://weka.sourceforge.net/doc.stable/
+  Filter filter = ..some type of filter..
+  /* Input */
+  Instances data = ..some instances..
+  for (int i = 0; i < data.numInstances(); i++) {
+    filter.input(data.instance(i));
+  }
+  /* Transform */
+  filter.batchFinished();
+  /* Output */
+  Instances newData = filter.outputFormat();
+  Instance processed;
+  while ((processed = filter.output()) != null) {
+    newData.add(processed);
+  }
+  ..do something with newData..

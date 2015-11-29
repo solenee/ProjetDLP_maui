@@ -75,32 +75,6 @@ public class DocumentsReader extends JCasCollectionReader_ImplBase {
 		fDesc.setId(i);
 		fDesc.addToIndexes();
 		i++;
-		
-		// Initialize ManualTopics
-		indexManualTopics(f.getAbsolutePath().replace(".txt", ".key"), jcas);
-	}
-
-	private void indexManualTopics(String keyFileAbsolutePath, JCas jcas) {
-		if (keyFileAbsolutePath.endsWith(".txt")) {
-			try {
-				File keyFile = new File(keyFileAbsolutePath);
-				if (keyFile.exists()) {
-					String manualTopics = FileUtils.readFileToString(keyFile);
-					for (String mTopic : manualTopics.split("\n")) {
-						if (mTopic.length() > 1) {
-							ManualTopic topic = new ManualTopic(jcas);
-							topic.setAbsolutePath(keyFileAbsolutePath);
-							topic.setTopic(mTopic);
-							topic.addToIndexes();
-						}
-					}
-					
-				}
-			} catch (IOException e) {
-				logger.log(Level.ALL, "Error while loading .key documents: " + e.getMessage());
-				throw new RuntimeException();
-			}
-		}
 	}
 
 }

@@ -1,4 +1,4 @@
-package fr.unantes.uima.mauilibrary.nativeTests;
+
 
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
