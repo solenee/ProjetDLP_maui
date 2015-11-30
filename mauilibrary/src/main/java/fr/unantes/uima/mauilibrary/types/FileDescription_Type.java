@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Nov 20 19:10:49 CET 2015
+ * Updated by JCasGen Mon Nov 30 20:09:46 CET 2015
  * @generated */
 public class FileDescription_Type extends Annotation_Type {
   /** @generated 

@@ -19,6 +19,7 @@ import com.entopix.maui.stopwords.Stopwords;
 import com.entopix.maui.stopwords.StopwordsFrench;
 import com.entopix.maui.util.DataLoader;
 
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import fr.unantes.uima.mauilibrary.annotator.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.draft.ModelBuilderUIMA;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
@@ -113,7 +114,7 @@ public class FrenchExampleTest {
 				createExternalResourceDescription(MauiFilterResource.class,"xx");
 		ExternalResourceDescription allTopicsResourceDesc =
 				createExternalResourceDescription(TopicBag_Impl.class,"xx");
-		
+		AnalysisEngine stanfordSegmenter = createEngine(StanfordSegmenter.class);
 		String cutOffTopicProbability = "0.0"; // TODO Find default value in Maui code
 		int topicsPerDocument = 8;
 		AnalysisEngine keyphraseExtractor = createEngine(KeyphraseExtractor.class,
@@ -121,7 +122,7 @@ public class FrenchExampleTest {
 				KeyphraseExtractor.RES_ALL_TOPICS, allTopicsResourceDesc,
 				KeyphraseExtractor.CUT_OFF_TOPIC_PROBABILITY, cutOffTopicProbability,
 				KeyphraseExtractor.TOPIC_PER_DOCUMENT, topicsPerDocument);
-		/*AnalysisEngine uimaModelBuilder = createEngine(ModelBuilderUIMA.class, 
+		/**/AnalysisEngine uimaModelBuilder = createEngine(ModelBuilderUIMA.class, 
 				ModelBuilderUIMA.INPUT_DIRECTORY_NAME,trainDir,
 				ModelBuilderUIMA.MODEL_NAME,modelName,
 				ModelBuilderUIMA.VOCABULARY_FORMAT,format,
@@ -139,12 +140,13 @@ public class FrenchExampleTest {
 				ModelBuilderUIMA.RES_STOPWORDS,stopWordsResourceDesc,
 				ModelBuilderUIMA.RES_STEMMER, stemmerResourceDesc
 				);
-		*/
+		/**/
 		SimplePipeline.runPipeline(
         		reader,
         		manualTopicsReader,
-        		keyphraseExtractor/*,
-        		uimaModelBuilder*/
+        		//stanfordSegmenter,
+        		//keyphraseExtractor/*,*/
+        		uimaModelBuilder
         		);
 		
 		/* TODO 

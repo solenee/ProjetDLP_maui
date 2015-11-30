@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Nov 20 19:10:49 CET 2015
- * XML source: /comptes/E15D861C/Cours_ATAL/ProjetDLP_maui/mauilibrary/desc/types/FileDescription.xml
+ * Updated by JCasGen Mon Nov 30 20:09:46 CET 2015
+ * XML source: C:/Users/Solène/Desktop/UIMAproject/ProjetDLP_maui/mauilibrary/desc/types/FileDescription.xml
  * @generated */
 public class FileDescription extends Annotation {
   /** @generated
