@@ -2,7 +2,6 @@ package fr.unantes.uima.mauilibrary.annotator;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,9 +17,9 @@ import fr.unantes.uima.mauilibrary.types.CandidateAnnotation;
 import fr.unantes.uima.mauilibrary.types.TopicAnnotation;
 import fr.unantes.uima.mauilibrary.utils.CandidatesComparator;
 
-public class Classifier_TF extends JCasAnnotator_ImplBase implements Classifier {
+public class Classifier_ImplBase extends JCasAnnotator_ImplBase implements Classifier {
 
-	Logger logger = UIMAFramework.getLogger(Classifier_TF.class);
+	Logger logger = UIMAFramework.getLogger(Classifier_ImplBase.class);
 
 	public static final String TOPIC_PER_DOCUMENT = "TOPIC_PER_DOCUMENT";
 	@ConfigurationParameter(name = TOPIC_PER_DOCUMENT, description = "number of topics per documents", mandatory = true)
@@ -37,7 +36,6 @@ public class Classifier_TF extends JCasAnnotator_ImplBase implements Classifier 
 			tAnno.setScore(elected.getScore());
 			tAnno.addToIndexes();
 		}
-		
 	}
 
 }

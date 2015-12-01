@@ -22,7 +22,7 @@ import com.entopix.maui.util.DataLoader;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import fr.unantes.uima.mauilibrary.annotator.CandidateExtractor_TF;
-import fr.unantes.uima.mauilibrary.annotator.Classifier_TF;
+import fr.unantes.uima.mauilibrary.annotator.Classifier_ImplBase;
 import fr.unantes.uima.mauilibrary.annotator.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.draft.ModelBuilderUIMA;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
@@ -45,11 +45,8 @@ public class TestV1_TF {
 	public void testFrench() throws Exception {
 		
 		// location of the data
-		String trainDir = "src/test/resources/data/term_assignment/train_fr";
+		//String trainDir = "src/test/resources/data/term_assignment/train_fr";
 		String testDir = "src/test/resources/data/term_assignment/test_fr";
-		
-		// name of the file for storing the model
-		String modelName = "src/test/resources/data/models/french_model";
 		
 		// language specific settings
 		String language = "fr";
@@ -57,20 +54,11 @@ public class TestV1_TF {
 		// UIMA :  Stopwords resource
 		ExternalResourceDescription stopWordsResourceDesc =
 				createExternalResourceDescription(StopWordsResource_MauiImpl.class, "xx");//,					StopWordsResource_MauiImpl.PARAM_LANGUAGE, language);
-//		Stopwords stopwords = new StopwordsFrench(); //->
-		
-		// document encoding
-		String encoding = "UTF-8";
-		
-		// vocabulary to use for term assignment
-		String vocabulary = "src/test/resources/data/vocabularies/agrovoc_fr.rdf.gz";
-		String format = "skos";
-		
 		
 		// UIMA : Run in UIMA pipeline
 		CollectionReader reader = createReader(
 	                DocumentsReader.class, 
-	                DocumentsReader.PARAM_DIRECTORY_NAME, trainDir,
+	                DocumentsReader.PARAM_DIRECTORY_NAME, testDir,
 	                DocumentsReader.DOCUMENT_LANGUAGE, language
 	        );
 		AnalysisEngine seg =  createEngine(StanfordSegmenter.class);
@@ -78,8 +66,8 @@ public class TestV1_TF {
 		AnalysisEngine candidateExtractor_TF = createEngine(CandidateExtractor_TF.class,
 				CandidateExtractor_TF.RES_STOPWORDS, stopWordsResourceDesc
 				);
-		AnalysisEngine classifier_TF = createEngine(Classifier_TF.class,
-				Classifier_TF.TOPIC_PER_DOCUMENT, 8
+		AnalysisEngine classifier_TF = createEngine(Classifier_ImplBase.class,
+				Classifier_ImplBase.TOPIC_PER_DOCUMENT, 8
 				);
 		AnalysisEngine writer = createEngine(TopicWriter.class,
 				TopicWriter.PATH_FILE, "src/test/resources/results/test_v1.results"
@@ -93,23 +81,5 @@ public class TestV1_TF {
         		classifier_TF,
         		writer
         		);
-		
-		/* TODO 
-		// Settings for the topic extractor
-		topicExtractor.inputDirectoryName = testDir;
-		topicExtractor.modelName = modelName;
-		topicExtractor.vocabularyName = vocabulary;
-		topicExtractor.vocabularyFormat = format;
-		topicExtractor.stemmer = stemmer;
-		topicExtractor.stopwords = stopwords;
-		topicExtractor.documentLanguage = language;
-		//topicExtractor.topicsPerDocument = numTopicsToExtract; 
-		topicExtractor.cutOffTopicProbability = 0.0;
-		topicExtractor.serialize = true;
-		
-		// TODO Refactor TopicExtractor
-		// Run topic extractor
-		topicExtractor.loadModel();
-		topicExtractor.extractTopics(DataLoader.loadTestDocuments(testDir));*/
 	}
 }

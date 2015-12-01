@@ -45,7 +45,7 @@ public class TopicWriter extends JCasAnnotator_ImplBase {
 			for (FileDescription fDesc : JCasUtil.select(aJCas, FileDescription.class)) {
 				// should be 1
 				filename = fDesc.getFileName();
-				stringbuffer.append("==================================\nFile name = "+filename);
+				stringbuffer.append("==================================\nFile name = "+filename+"\n");
 			}
 			for (TopicAnnotation topic : JCasUtil.select(aJCas, TopicAnnotation.class)) { 
 				stringbuffer.append(topic.getText()+"\t"+topic.getScore()+"\n");  
