@@ -3,6 +3,10 @@
  */
 package fr.unantes.uima.mauilibrary.resource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.entopix.maui.stopwords.Stopwords;
 
 /**

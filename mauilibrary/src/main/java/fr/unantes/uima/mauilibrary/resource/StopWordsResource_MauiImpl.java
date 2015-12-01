@@ -1,5 +1,7 @@
 package fr.unantes.uima.mauilibrary.resource;
 
+import java.util.regex.Pattern;
+
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.DataResource;
@@ -25,7 +27,7 @@ public class StopWordsResource_MauiImpl implements StopWordsResource, SharedReso
 	@ConfigurationParameter(name = PARAM_LANGUAGE,
 			description = "default language for the text",
 			mandatory = false, defaultValue = "en")
-	private String language = "en";
+	private String language;
 	
 	/** Maui Stopwords object */
 	private Stopwords mauiStopwords;
@@ -35,19 +37,23 @@ public class StopWordsResource_MauiImpl implements StopWordsResource, SharedReso
 		logger.log(Level.INFO, "language == "+language);
 	}
 
+	public boolean isWord(String key) {
+		return Pattern.matches("(\\w|à|â|ä|é|è|ê|ë|î|ï|ô|ö|û|ü|ç)+", key);
+	}
 	public Boolean isStopword(String key) {
-		return mauiStopwords.isStopword(key);
+		return mauiStopwords.isStopword(key) || (!isWord(key));
 	}
 
 	public Stopwords getMauiStopwords() {
-		if (mauiStopwords == null) {
-			mauiStopwords = StopwordsFactory.makeStopwords(language);
-		}
 		return mauiStopwords;
 	}
 
 	public void setLanguage(String language) {
-		this.language = language;		
+		if (this.language == null || (this.language != language)) {
+			this.language = language;
+			mauiStopwords = StopwordsFactory.makeStopwords(language);
+		}
+		
 	}
 
 }

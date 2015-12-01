@@ -34,6 +34,11 @@ public class DocumentsReader extends JCasCollectionReader_ImplBase {
 
 	Logger logger = UIMAFramework.getLogger(DocumentsReader.class);
 
+	public static final String DOCUMENT_LANGUAGE = "DOCUMENT_LANGUAGE";
+	@ConfigurationParameter(name = DOCUMENT_LANGUAGE,
+			mandatory = false, defaultValue = "en")
+	private String documentLanguage;
+	
 	public static final String PARAM_DIRECTORY_NAME = "DirectoryName";
 	@ConfigurationParameter(name = PARAM_DIRECTORY_NAME,
 			description = "The name of the directory of text files to be read",
@@ -68,6 +73,7 @@ public class DocumentsReader extends JCasCollectionReader_ImplBase {
 		File f = documents.get(i);
 		String s = FileUtils.readFileToString(f);
 		jcas.setDocumentText(s);
+		jcas.setDocumentLanguage(documentLanguage);
 		// Initialize FileDescription
 		FileDescription fDesc = new FileDescription(jcas);
 		fDesc.setAbsolutePath(f.getAbsolutePath());

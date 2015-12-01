@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Nov 20 17:47:30 CET 2015
+ * Updated by JCasGen Tue Dec 01 10:56:56 CET 2015
  * @generated */
 public class CandidateAnnotation_Type extends Annotation_Type {
   /** @generated 
@@ -47,26 +47,50 @@ public class CandidateAnnotation_Type extends Annotation_Type {
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
  
   /** @generated */
-  final Feature casFeat_Frequency;
+  final Feature casFeat_Score;
   /** @generated */
-  final int     casFeatCode_Frequency;
+  final int     casFeatCode_Score;
   /** @generated
    * @param addr low level Feature Structure reference
    * @return the feature value 
    */ 
-  public double getFrequency(int addr) {
-        if (featOkTst && casFeat_Frequency == null)
-      jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
-    return ll_cas.ll_getDoubleValue(addr, casFeatCode_Frequency);
+  public double getScore(int addr) {
+        if (featOkTst && casFeat_Score == null)
+      jcas.throwFeatMissing("Score", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    return ll_cas.ll_getDoubleValue(addr, casFeatCode_Score);
   }
   /** @generated
    * @param addr low level Feature Structure reference
    * @param v value to set 
    */    
-  public void setFrequency(int addr, double v) {
-        if (featOkTst && casFeat_Frequency == null)
-      jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
-    ll_cas.ll_setDoubleValue(addr, casFeatCode_Frequency, v);}
+  public void setScore(int addr, double v) {
+        if (featOkTst && casFeat_Score == null)
+      jcas.throwFeatMissing("Score", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    ll_cas.ll_setDoubleValue(addr, casFeatCode_Score, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_Lemme;
+  /** @generated */
+  final int     casFeatCode_Lemme;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getLemme(int addr) {
+        if (featOkTst && casFeat_Lemme == null)
+      jcas.throwFeatMissing("Lemme", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_Lemme);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setLemme(int addr, String v) {
+        if (featOkTst && casFeat_Lemme == null)
+      jcas.throwFeatMissing("Lemme", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    ll_cas.ll_setStringValue(addr, casFeatCode_Lemme, v);}
     
   
 
@@ -82,8 +106,12 @@ public class CandidateAnnotation_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_Frequency = jcas.getRequiredFeatureDE(casType, "Frequency", "uima.cas.Double", featOkTst);
-    casFeatCode_Frequency  = (null == casFeat_Frequency) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Frequency).getCode();
+    casFeat_Score = jcas.getRequiredFeatureDE(casType, "Score", "uima.cas.Double", featOkTst);
+    casFeatCode_Score  = (null == casFeat_Score) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Score).getCode();
+
+ 
+    casFeat_Lemme = jcas.getRequiredFeatureDE(casType, "Lemme", "uima.cas.String", featOkTst);
+    casFeatCode_Lemme  = (null == casFeat_Lemme) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Lemme).getCode();
 
   }
 }

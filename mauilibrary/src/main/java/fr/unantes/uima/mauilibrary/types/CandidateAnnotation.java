@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Nov 20 17:47:30 CET 2015
- * XML source: /comptes/E15D861C/Cours_ATAL/ProjetDLP_maui/mauilibrary/desc/types/CandidateAnnotation.xml
+ * Updated by JCasGen Tue Dec 01 10:56:56 CET 2015
+ * XML source: C:/Users/Solène/Desktop/UIMAproject/ProjetDLP_maui/mauilibrary/src/main/resources/desc/types/CandidateAnnotation.xml
  * @generated */
 public class CandidateAnnotation extends Annotation {
   /** @generated
@@ -77,25 +77,47 @@ public class CandidateAnnotation extends Annotation {
  
     
   //*--------------*
-  //* Feature: Frequency
+  //* Feature: Score
 
-  /** getter for Frequency - gets 
+  /** getter for Score - gets 
    * @generated
    * @return value of the feature 
    */
-  public double getFrequency() {
-    if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Frequency == null)
-      jcasType.jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
-    return jcasType.ll_cas.ll_getDoubleValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Frequency);}
+  public double getScore() {
+    if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Score == null)
+      jcasType.jcas.throwFeatMissing("Score", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    return jcasType.ll_cas.ll_getDoubleValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Score);}
     
-  /** setter for Frequency - sets  
+  /** setter for Score - sets  
    * @generated
    * @param v value to set into the feature 
    */
-  public void setFrequency(double v) {
-    if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Frequency == null)
-      jcasType.jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
-    jcasType.ll_cas.ll_setDoubleValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Frequency, v);}    
+  public void setScore(double v) {
+    if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Score == null)
+      jcasType.jcas.throwFeatMissing("Score", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    jcasType.ll_cas.ll_setDoubleValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Score, v);}    
+   
+    
+  //*--------------*
+  //* Feature: Lemme
+
+  /** getter for Lemme - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public String getLemme() {
+    if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Lemme == null)
+      jcasType.jcas.throwFeatMissing("Lemme", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Lemme);}
+    
+  /** setter for Lemme - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setLemme(String v) {
+    if (CandidateAnnotation_Type.featOkTst && ((CandidateAnnotation_Type)jcasType).casFeat_Lemme == null)
+      jcasType.jcas.throwFeatMissing("Lemme", "fr.unantes.uima.mauilibrary.types.CandidateAnnotation");
+    jcasType.ll_cas.ll_setStringValue(addr, ((CandidateAnnotation_Type)jcasType).casFeatCode_Lemme, v);}    
   }
 
     
