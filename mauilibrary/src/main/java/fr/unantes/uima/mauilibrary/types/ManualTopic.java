@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Fri Nov 20 18:14:06 CET 2015 */
+/* First created by JCasGen Mon Dec 07 16:30:06 CET 2015 */
 package fr.unantes.uima.mauilibrary.types;
 
 import org.apache.uima.jcas.JCas; 
@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Manual topic stored in .key file
- * Updated by JCasGen Fri Nov 20 18:14:33 CET 2015
- * XML source: /comptes/E15D861C/Cours_ATAL/ProjetDLP_maui/mauilibrary/desc/types/ManualTopic.xml
+ * Updated by JCasGen Mon Dec 07 16:30:06 CET 2015
+ * XML source: C:/Users/Solène/Desktop/UIMAproject/ProjetDLP_maui/mauilibrary/desc/types/ManualTopic.xml
  * @generated */
 public class ManualTopic extends Annotation {
   /** @generated
@@ -140,6 +140,28 @@ public class ManualTopic extends Annotation {
     if (ManualTopic_Type.featOkTst && ((ManualTopic_Type)jcasType).casFeat_Topic == null)
       jcasType.jcas.throwFeatMissing("Topic", "fr.unantes.uima.mauilibrary.types.ManualTopic");
     jcasType.ll_cas.ll_setStringValue(addr, ((ManualTopic_Type)jcasType).casFeatCode_Topic, v);}    
+   
+    
+  //*--------------*
+  //* Feature: Frequency
+
+  /** getter for Frequency - gets 
+   * @generated
+   * @return value of the feature 
+   */
+  public int getFrequency() {
+    if (ManualTopic_Type.featOkTst && ((ManualTopic_Type)jcasType).casFeat_Frequency == null)
+      jcasType.jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.ManualTopic");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((ManualTopic_Type)jcasType).casFeatCode_Frequency);}
+    
+  /** setter for Frequency - sets  
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setFrequency(int v) {
+    if (ManualTopic_Type.featOkTst && ((ManualTopic_Type)jcasType).casFeat_Frequency == null)
+      jcasType.jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.ManualTopic");
+    jcasType.ll_cas.ll_setIntValue(addr, ((ManualTopic_Type)jcasType).casFeatCode_Frequency, v);}    
   }
 
     

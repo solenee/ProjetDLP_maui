@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Mon Dec 07 14:22:49 CET 2015 */
+/* First created by JCasGen Mon Dec 07 16:29:27 CET 2015 */
 package fr.unantes.uima.mauilibrary.types;
 
 import org.apache.uima.jcas.JCas; 
@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Dec 07 14:22:49 CET 2015
+ * Updated by JCasGen Mon Dec 07 16:40:49 CET 2015
  * XML source: C:/Users/Solène/Desktop/UIMAproject/ProjetDLP_maui/mauilibrary/desc/types/FileDescription.xml
  * @generated */
 public class FileDescription extends Annotation {

@@ -30,15 +30,15 @@ import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource_MauiImpl;
 
-public class ClassifierWrapper extends Classifier_ImplBase {
-	
+public abstract class ClassifierWrapper extends Classifier_ImplBase {
+	/*
 	public static final String TOPICS_PER_DOCUMENT = "TOPICS_PER_DOCUMENT";
 	@ConfigurationParameter(name = TOPICS_PER_DOCUMENT,
 			mandatory = false, defaultValue = "8")
 	private Integer topicsPerDocument;
 	
 	
-	/** Indices of attributes in classifierData */
+	// Indices of attributes in classifierData
 	// General features
 	private int tfIndex = 0; // term frequency (freq feature)
 	private int idfIndex = 1; // inverse document frequency (freq feature)
@@ -49,7 +49,7 @@ public class ClassifierWrapper extends Classifier_ImplBase {
 	private int domainKeyphIndex = 6; // domain keyphraseness
 	private int lengthIndex = 7; // term length
 	private int generalityIndex = 8; // generality
-	/** TODO */
+	// TODO
 	private Boolean training = Boolean.TRUE;
 	int fileNameAtt = 0 ; //TODO
 	int keyphrasesAtt = 1; //TODO
@@ -58,24 +58,17 @@ public class ClassifierWrapper extends Classifier_ImplBase {
 	int numFeatures = 1; // TODO
 	boolean nominalClassValue = false; // TODO
 	int numDocs = 1; //TODO 
-	/**
-	 * Number of human indexers (times a keyphrase appears in the keyphrase set)
-	 */
+	
+	 //Number of human indexers (times a keyphrase appears in the keyphrase set)
 	private int numIndexers = 1;
-	/**
-	 * Template for the classifier data
-	 */
+	//Template for the classifier data
 	private Instances classifierData = null;
-	/**
-	 * The actual classifier used to compute probabilities
-	 */
+	//The actual classifier used to compute probabilities
 	private Classifier classifier = null;
 	
 	
 	//-------------------------------------------------
-	/**
-	 * Not used in this version
-	 */
+	 //Not used in this version
 	private String vocabularyName = "none";
 	
 	public final static String RES_STOPWORDS = "stopwordsResource";
@@ -109,9 +102,7 @@ public class ClassifierWrapper extends Classifier_ImplBase {
 		
 	}
 	
-	/**
-	 * Computes the feature values for a given phrase.
-	 */
+	// Computes the feature values for a given phrase.
 	private double[] computeFeatureValues(Candidate candidate,
 			boolean training, HashMap<String, Counter> hashKeyphrases,
 			HashMap<String, Candidate> candidates) {
@@ -204,11 +195,10 @@ public class ClassifierWrapper extends Classifier_ImplBase {
 		HashMap<String, Counter> hashKeyphrases = null;
 
 		//TODO
-		/*
-		if (!instance.isMissing(keyphrasesAtt)) {
-			String keyphrases = instance.stringValue(keyphrasesAtt);
-			hashKeyphrases = mauiFilter.getGivenKeyphrases(keyphrases);
-		}*/
+//		if (!instance.isMissing(keyphrasesAtt)) {
+//			String keyphrases = instance.stringValue(keyphrasesAtt);
+//			hashKeyphrases = mauiFilter.getGivenKeyphrases(keyphrases);
+//		}
 
 		// Get the document text
 		String documentText = instance.stringValue(documentAtt);
@@ -404,5 +394,5 @@ public class ClassifierWrapper extends Classifier_ImplBase {
 		selectTopics(jCas.getDocumentText(), null);
 		super.process(jCas);
 	}
-
+*/
 }

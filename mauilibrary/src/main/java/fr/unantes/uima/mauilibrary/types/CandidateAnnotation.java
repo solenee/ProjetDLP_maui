@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sun Dec 06 15:07:52 CET 2015
+ * Updated by JCasGen Mon Dec 07 16:29:47 CET 2015
  * XML source: C:/Users/Solène/Desktop/UIMAproject/ProjetDLP_maui/mauilibrary/desc/types/CandidateAnnotation.xml
  * @generated */
 public class CandidateAnnotation extends Annotation {

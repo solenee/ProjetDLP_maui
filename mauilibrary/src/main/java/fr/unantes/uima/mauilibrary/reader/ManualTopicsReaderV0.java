@@ -13,7 +13,6 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 
 import fr.unantes.uima.mauilibrary.types.FileDescription;
-import fr.unantes.uima.mauilibrary.types.ManualTopic;
 
 public class ManualTopicsReaderV0 extends JCasAnnotator_ImplBase {
 

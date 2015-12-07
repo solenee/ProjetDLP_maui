@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Fri Nov 20 18:14:06 CET 2015 */
+/* First created by JCasGen Mon Dec 07 16:30:06 CET 2015 */
 package fr.unantes.uima.mauilibrary.types;
 
 import org.apache.uima.jcas.JCas;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Manual topic stored in .key file
- * Updated by JCasGen Fri Nov 20 18:14:33 CET 2015
+ * Updated by JCasGen Mon Dec 07 16:30:06 CET 2015
  * @generated */
 public class ManualTopic_Type extends Annotation_Type {
   /** @generated 
@@ -117,6 +117,30 @@ public class ManualTopic_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_Topic, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_Frequency;
+  /** @generated */
+  final int     casFeatCode_Frequency;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getFrequency(int addr) {
+        if (featOkTst && casFeat_Frequency == null)
+      jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.ManualTopic");
+    return ll_cas.ll_getIntValue(addr, casFeatCode_Frequency);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setFrequency(int addr, int v) {
+        if (featOkTst && casFeat_Frequency == null)
+      jcas.throwFeatMissing("Frequency", "fr.unantes.uima.mauilibrary.types.ManualTopic");
+    ll_cas.ll_setIntValue(addr, casFeatCode_Frequency, v);}
+    
+  
 
 
 
@@ -140,6 +164,10 @@ public class ManualTopic_Type extends Annotation_Type {
  
     casFeat_Topic = jcas.getRequiredFeatureDE(casType, "Topic", "uima.cas.String", featOkTst);
     casFeatCode_Topic  = (null == casFeat_Topic) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Topic).getCode();
+
+ 
+    casFeat_Frequency = jcas.getRequiredFeatureDE(casType, "Frequency", "uima.cas.Integer", featOkTst);
+    casFeatCode_Frequency  = (null == casFeat_Frequency) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Frequency).getCode();
 
   }
 }
