@@ -25,7 +25,7 @@ import fr.unantes.uima.mauilibrary.annotator.CandidateExtractorWrapper;
 import fr.unantes.uima.mauilibrary.annotator.CandidateExtractor_TF;
 import fr.unantes.uima.mauilibrary.annotator.Classifier_ImplBase;
 import fr.unantes.uima.mauilibrary.draft.CandidateExtractorDraft;
-import fr.unantes.uima.mauilibrary.draft.ModelBuilderUIMA;
+import fr.unantes.uima.mauilibrary.model.ModelBuilderUIMA;
 import fr.unantes.uima.mauilibrary.notworking.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
 import fr.unantes.uima.mauilibrary.reader.ManualTopicsReader;

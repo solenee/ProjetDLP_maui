@@ -20,7 +20,7 @@ import com.entopix.maui.stopwords.StopwordsFrench;
 import com.entopix.maui.util.DataLoader;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import fr.unantes.uima.mauilibrary.draft.ModelBuilderUIMA;
+import fr.unantes.uima.mauilibrary.model.ModelBuilderUIMA;
 import fr.unantes.uima.mauilibrary.notworking.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
 import fr.unantes.uima.mauilibrary.reader.ManualTopicsReader;
@@ -37,7 +37,7 @@ import fr.unantes.uima.mauilibrary.resource.TopicBag_Impl;
  */
 public class FrenchExampleTest {
 
-	@Test
+	//@Test
 	public void testFrench() throws Exception {
 		
 		// location of the data

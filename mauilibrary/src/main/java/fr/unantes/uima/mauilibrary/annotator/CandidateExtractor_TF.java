@@ -11,12 +11,11 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import fr.unantes.uima.mauilibrary.draft.CandidateExtractor;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
 import fr.unantes.uima.mauilibrary.types.CandidateAnnotation;
 import fr.unantes.uima.mauilibrary.types.FileDescription;
 
-public class CandidateExtractor_TF extends JCasAnnotator_ImplBase implements CandidateExtractor {
+public class CandidateExtractor_TF extends JCasAnnotator_ImplBase {
 
 	public final static String RES_STOPWORDS = "stopwordsResource";
 	@ExternalResource(key = RES_STOPWORDS)

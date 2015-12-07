@@ -1,4 +1,4 @@
-package fr.unantes.uima.mauilibrary.draft;
+package fr.unantes.uima.mauilibrary.model;
 
 import java.io.File;
 import java.util.ArrayList;
