@@ -21,8 +21,10 @@ import com.entopix.maui.util.DataLoader;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import fr.unantes.uima.mauilibrary.annotator.CandidateExtractorWrapper;
 import fr.unantes.uima.mauilibrary.annotator.CandidateExtractor_TF;
 import fr.unantes.uima.mauilibrary.annotator.Classifier_ImplBase;
+import fr.unantes.uima.mauilibrary.draft.CandidateExtractorDraft;
 import fr.unantes.uima.mauilibrary.draft.ModelBuilderUIMA;
 import fr.unantes.uima.mauilibrary.notworking.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
@@ -32,6 +34,9 @@ import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.TopicBag_Impl;
+import fr.unantes.uima.mauilibrary.tokenizer.LineSplitter;
+import fr.unantes.uima.mauilibrary.tokenizer.WhitespaceTokenizer;
+import fr.unantes.uima.mauilibrary.writer.SyntaxicAnnotationWriter;
 import fr.unantes.uima.mauilibrary.writer.TopicWriter;
 
 /**
@@ -39,7 +44,7 @@ import fr.unantes.uima.mauilibrary.writer.TopicWriter;
  * @author solenee
  *
  */
-public class TestV1_TF {
+public class TestV2_CandidateAnnotations {
 
 	@Test
 	public void testFrench() throws Exception {
@@ -53,33 +58,39 @@ public class TestV1_TF {
 		
 		// UIMA :  Stopwords resource
 		ExternalResourceDescription stopWordsResourceDesc =
-				createExternalResourceDescription(StopWordsResource_MauiImpl.class, "xx");//,					StopWordsResource_MauiImpl.PARAM_LANGUAGE, language);
+				createExternalResourceDescription(StopWordsResource_MauiImpl.class, "xx");
 		
+		// UIMA :  Stemmer resource
+		ExternalResourceDescription stemmerResourceDesc =
+				createExternalResourceDescription(StemmerResource_MauiImpl.class,"xx");
 		// UIMA : Run in UIMA pipeline
 		CollectionReader reader = createReader(
 	                DocumentsReader.class, 
 	                DocumentsReader.PARAM_DIRECTORY_NAME, testDir,
 	                DocumentsReader.DOCUMENT_LANGUAGE, language
 	        );
-		AnalysisEngine seg =  createEngine(StanfordSegmenter.class);
-    	AnalysisEngine parse =  createEngine(StanfordParser.class);
-		AnalysisEngine candidateExtractor_TF = createEngine(CandidateExtractor_TF.class,
-				CandidateExtractor_TF.RES_STOPWORDS, stopWordsResourceDesc
-				);
-		AnalysisEngine classifier_TF = createEngine(Classifier_ImplBase.class,
+		AnalysisEngine lineSplitter =  createEngine(LineSplitter.class);
+		AnalysisEngine tokenizer =  createEngine(WhitespaceTokenizer.class);
+		AnalysisEngine candidateExtractor =  createEngine(CandidateExtractorWrapper.class,
+    			CandidateExtractorWrapper.RES_STOPWORDS,stopWordsResourceDesc,
+    			CandidateExtractorWrapper.RES_STEMMER, stemmerResourceDesc);
+
+
+    	/*AnalysisEngine classifier_TF = createEngine(Classifier_ImplBase.class,
 				Classifier_ImplBase.TOPIC_PER_DOCUMENT, 8
 				);
-		AnalysisEngine writer = createEngine(TopicWriter.class,
+				*/
+    	AnalysisEngine syntaxicWriter = createEngine(SyntaxicAnnotationWriter.class);
+		/*AnalysisEngine writer = createEngine(TopicWriter.class,
 				TopicWriter.PATH_FILE, "src/test/resources/results/test_v1.results"
 				);
-		
+		*/		
 		SimplePipeline.runPipeline(
         		reader,
-        		seg,
-        		//parse,
-        		candidateExtractor_TF,
-        		classifier_TF,
-        		writer
+        		//lineSplitter,
+        		//tokenizer,
+        		candidateExtractor,
+        		syntaxicWriter
         		);
 	}
 }

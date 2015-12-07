@@ -11,8 +11,8 @@ import org.apache.uima.resource.ExternalResourceDescription;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import fr.unantes.uima.mauilibrary.annotator.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.draft.ModelBuilderUIMA;
+import fr.unantes.uima.mauilibrary.notworking.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
 import fr.unantes.uima.mauilibrary.reader.ManualTopicsReader;
 import fr.unantes.uima.mauilibrary.resource.MauiFilterResource;
@@ -47,8 +47,8 @@ public class RawEncapsulationTest {
 		
 		// UIMA : Stemmer resource
 		ExternalResourceDescription stemmerResourceDesc =
-				createExternalResourceDescription(StemmerResource_MauiImpl.class,"xx",
-						StemmerResource_MauiImpl.PARAM_LANGUAGE, language);
+				createExternalResourceDescription(StemmerResource_MauiImpl.class,"xx");
+		//,						StemmerResource_MauiImpl.PARAM_LANGUAGE, language);
 //		Stemmer stemmer = new FrenchStemmer(); //->
 		
 		// document encoding

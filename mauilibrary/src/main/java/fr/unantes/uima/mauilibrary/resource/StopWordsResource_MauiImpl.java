@@ -23,10 +23,10 @@ public class StopWordsResource_MauiImpl implements StopWordsResource, SharedReso
 
 	Logger logger = UIMAFramework.getLogger(StopWordsResource_MauiImpl.class); 
 	
-	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	/*public static final String PARAM_LANGUAGE = "LANGUAGE";
 	@ConfigurationParameter(name = PARAM_LANGUAGE,
 			description = "default language for the text",
-			mandatory = false, defaultValue = "en")
+			mandatory = false, defaultValue = "en")*/
 	private String language;
 	
 	/** Maui Stopwords object */
@@ -49,7 +49,7 @@ public class StopWordsResource_MauiImpl implements StopWordsResource, SharedReso
 	}
 
 	public void setLanguage(String language) {
-		if (this.language == null || (this.language != language)) {
+		if (this.language == null || (mauiStopwords == null) || (this.language != language)) {
 			this.language = language;
 			mauiStopwords = StopwordsFactory.makeStopwords(language);
 		}

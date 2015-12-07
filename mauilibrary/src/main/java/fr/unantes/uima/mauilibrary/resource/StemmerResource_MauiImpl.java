@@ -19,11 +19,11 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 
 	Logger logger = UIMAFramework.getLogger(StemmerResource_MauiImpl.class);
 	
-	public static final String PARAM_LANGUAGE = "LANGUAGE";
+	/*public static final String PARAM_LANGUAGE = "LANGUAGE";
 	@ConfigurationParameter(name = PARAM_LANGUAGE,
 			description = "default language for the text",
-			mandatory = false, defaultValue = "en")
-	private String language;
+			mandatory = false, defaultValue = "en")*/
+	private String language = "en";
 	
 	/** Maui Stemmer object */
 	private Stemmer mauiStemmer;
@@ -43,31 +43,29 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 	 * @return mauiStemmer
 	 */
 	public Stemmer getMauiStemmer() {
-		if (mauiStemmer == null) {
-			initStemmer();
-		}
 		return mauiStemmer;
 	}
 	
 	private void initStemmer() {
-		if ( (mauiStemmer == null) && !(language == null) ) {
-			if (language.equals("en")) {
-				mauiStemmer = new PorterStemmer();
-			} else if (language.equals("fr")) {
-				mauiStemmer = new FrenchStemmer();
-			} else if (language.equals("es")) {
-				mauiStemmer = new SpanishStemmer();
-			} else if (language.equals("de")) {
-				mauiStemmer = new GermanStemmer();
-			} else {
-				mauiStemmer = new NoStemmer();
-			}
+		if (language.equals("en")) {
+			mauiStemmer = new PorterStemmer();
+		} else if (language.equals("fr")) {
+			mauiStemmer = new FrenchStemmer();
+		} else if (language.equals("es")) {
+			mauiStemmer = new SpanishStemmer();
+		} else if (language.equals("de")) {
+			mauiStemmer = new GermanStemmer();
+		} else {
+			mauiStemmer = new NoStemmer();
 		}
 	}
 
 	public void setLanguage(String language) {
-		this.language = language;
-		
+		if ((this.language == null) || (this.language != language)) {
+			this.language = language;
+			initStemmer();
+		}
+		logger.log(Level.INFO, "language == "+language);
 	}
 
 }

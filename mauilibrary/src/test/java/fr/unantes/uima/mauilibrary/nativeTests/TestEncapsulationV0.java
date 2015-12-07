@@ -21,17 +21,25 @@ import com.entopix.maui.util.DataLoader;
 
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
+import fr.unantes.uima.mauilibrary.annotator.CandidateExtractorWrapper;
 import fr.unantes.uima.mauilibrary.annotator.CandidateExtractor_TF;
 import fr.unantes.uima.mauilibrary.annotator.Classifier_ImplBase;
+import fr.unantes.uima.mauilibrary.annotator.ModelBuilderV0;
+import fr.unantes.uima.mauilibrary.draft.CandidateExtractorDraft;
 import fr.unantes.uima.mauilibrary.draft.ModelBuilderUIMA;
 import fr.unantes.uima.mauilibrary.notworking.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
 import fr.unantes.uima.mauilibrary.reader.ManualTopicsReader;
+import fr.unantes.uima.mauilibrary.reader.ManualTopicsReaderV0;
+import fr.unantes.uima.mauilibrary.refactoring.MauiFilterV0;
 import fr.unantes.uima.mauilibrary.resource.MauiFilterResource;
 import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.TopicBag_Impl;
+import fr.unantes.uima.mauilibrary.tokenizer.LineSplitter;
+import fr.unantes.uima.mauilibrary.tokenizer.WhitespaceTokenizer;
+import fr.unantes.uima.mauilibrary.writer.SyntaxicAnnotationWriter;
 import fr.unantes.uima.mauilibrary.writer.TopicWriter;
 
 /**
@@ -39,13 +47,14 @@ import fr.unantes.uima.mauilibrary.writer.TopicWriter;
  * @author solenee
  *
  */
-public class TestV1_TF {
+public class TestEncapsulationV0 {
 
 	@Test
 	public void testFrench() throws Exception {
 		
+		String modelName = "src/test/resources/results/modelUIMA";
 		// location of the data
-		//String trainDir = "src/test/resources/data/term_assignment/train_fr";
+		String trainDir = "src/test/resources/data/term_assignment/train_fr";
 		String testDir = "src/test/resources/data/term_assignment/test_fr";
 		
 		// language specific settings
@@ -53,33 +62,59 @@ public class TestV1_TF {
 		
 		// UIMA :  Stopwords resource
 		ExternalResourceDescription stopWordsResourceDesc =
-				createExternalResourceDescription(StopWordsResource_MauiImpl.class, "xx");//,					StopWordsResource_MauiImpl.PARAM_LANGUAGE, language);
+				createExternalResourceDescription(StopWordsResource_MauiImpl.class, "xx");
+		// UIMA :  Stemmer resource
+		ExternalResourceDescription stemmerResourceDesc =
+				createExternalResourceDescription(StemmerResource_MauiImpl.class,"xx");
 		
+		// UIMA :  MauiFilter resource
+	    ExternalResourceDescription mauiFilterResourceDesc =
+						createExternalResourceDescription(MauiFilterV0.class, "xx");
+
 		// UIMA : Run in UIMA pipeline
 		CollectionReader reader = createReader(
 	                DocumentsReader.class, 
 	                DocumentsReader.PARAM_DIRECTORY_NAME, testDir,
 	                DocumentsReader.DOCUMENT_LANGUAGE, language
 	        );
-		AnalysisEngine seg =  createEngine(StanfordSegmenter.class);
-    	AnalysisEngine parse =  createEngine(StanfordParser.class);
-		AnalysisEngine candidateExtractor_TF = createEngine(CandidateExtractor_TF.class,
-				CandidateExtractor_TF.RES_STOPWORDS, stopWordsResourceDesc
-				);
-		AnalysisEngine classifier_TF = createEngine(Classifier_ImplBase.class,
-				Classifier_ImplBase.TOPIC_PER_DOCUMENT, 8
-				);
-		AnalysisEngine writer = createEngine(TopicWriter.class,
+		AnalysisEngine manualTopicsReader = createEngine(ManualTopicsReaderV0.class);
+		
+		
+		
+		AnalysisEngine modelBuilder = createEngine(ModelBuilderV0.class,
+				ModelBuilderV0.DOCUMENT_LANGUAGE, language,
+				ModelBuilderV0.MODEL_NAME, modelName,
+				ModelBuilderV0.RES_STEMMER, stemmerResourceDesc,
+				ModelBuilderV0.RES_STOPWORDS, stopWordsResourceDesc,
+				ModelBuilderV0.RES_MODEL, mauiFilterResourceDesc); // TODO
+		
+		// Build model : training
+		SimplePipeline.runPipeline(
+        		reader,
+        		manualTopicsReader,
+        		modelBuilder
+        		);
+
+		//-------------------------------------------
+		/*
+		mauiFilterResourceDesc =
+				createExternalResourceDescription(MauiFilterV0.class, modelName);
+		
+		AnalysisEngine topicExtractor =  createEngine(CandidateExtractorWrapper.class,
+    			CandidateExtractorWrapper.RES_STOPWORDS,stopWordsResourceDesc,
+    			CandidateExtractorWrapper.RES_STEMMER, stemmerResourceDesc);
+
+		AnalysisEngine topicWriter = createEngine(TopicWriter.class,
 				TopicWriter.PATH_FILE, "src/test/resources/results/test_v1.results"
 				);
 		
+		// Extract topics : test
 		SimplePipeline.runPipeline(
         		reader,
-        		seg,
-        		//parse,
-        		candidateExtractor_TF,
-        		classifier_TF,
-        		writer
+        		manualTopicsReader,
+        		topicExtractor,
+        		topicWriter
         		);
+        		*/
 	}
 }

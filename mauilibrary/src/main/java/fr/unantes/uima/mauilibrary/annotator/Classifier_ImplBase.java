@@ -25,17 +25,21 @@ public class Classifier_ImplBase extends JCasAnnotator_ImplBase implements Class
 	@ConfigurationParameter(name = TOPIC_PER_DOCUMENT, description = "number of topics per documents", mandatory = true)
 	private int topicsPerDocument;
 	
-	@Override
-	public void process(JCas jCas) throws AnalysisEngineProcessException {
+	protected void annotateTopics(JCas jCas) {
 		List<CandidateAnnotation> candidates  = new ArrayList<CandidateAnnotation>(JCasUtil.select(jCas, CandidateAnnotation.class));
 		Collections.sort(candidates, new CandidatesComparator());
 		for (int i=0; i <topicsPerDocument && i<candidates.size(); i++) {
 			CandidateAnnotation elected  = candidates.get(i);
 			TopicAnnotation tAnno = new TopicAnnotation(jCas);
-			tAnno.setText(elected.getLemme());
+			tAnno.setText(elected.getName());
 			tAnno.setScore(elected.getScore());
 			tAnno.addToIndexes();
 		}
+	}
+	
+	@Override
+	public void process(JCas jCas) throws AnalysisEngineProcessException {
+		annotateTopics(jCas);
 	}
 
 }

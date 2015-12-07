@@ -11,6 +11,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import fr.unantes.uima.mauilibrary.draft.CandidateExtractor;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
 import fr.unantes.uima.mauilibrary.types.CandidateAnnotation;
 import fr.unantes.uima.mauilibrary.types.FileDescription;
@@ -26,6 +27,7 @@ public class CandidateExtractor_TF extends JCasAnnotator_ImplBase implements Can
 			throws ResourceInitializationException {
 		super.initialize(context);
 	}
+	
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
 		// Initialize stopwords resource
@@ -53,10 +55,10 @@ public class CandidateExtractor_TF extends JCasAnnotator_ImplBase implements Can
 		}
 		
 		// Create CandidateAnnotation s
-		for (String lemma : termFrequencies.keySet()) {
+		for (String name : termFrequencies.keySet()) {
 			CandidateAnnotation candidate = new CandidateAnnotation(jCas);
-			candidate.setLemme(lemma);
-			candidate.setScore(termFrequencies.get(lemma));
+			candidate.setName(name);
+			candidate.setScore(termFrequencies.get(name));
 			candidate.addToIndexes();
 		}
 	} 

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>CandidateAnnotation</name>
+  <name>PhraseAnnotation</name>
   <description/>
   <version>1.0</version>
   <vendor/>
   <types>
     <typeDescription>
-      <name>fr.unantes.uima.mauilibrary.types.CandidateAnnotation</name>
+      <name>fr.unantes.uima.mauilibrary.types.PhraseAnnotation</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>Score</name>
-          <description/>
-          <rangeTypeName>uima.cas.Double</rangeTypeName>
-        </featureDescription>
-      <featureDescription>
-          <name>Name</name>
+          <name>Stem</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>FirstOccurence</name>
+          <description/>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>
