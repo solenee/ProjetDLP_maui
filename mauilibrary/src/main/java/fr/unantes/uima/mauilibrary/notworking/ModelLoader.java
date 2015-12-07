@@ -1,4 +1,4 @@
-package fr.unantes.uima.mauilibrary.annotator;
+package fr.unantes.uima.mauilibrary.notworking;
 
 import weka.filters.Filter;
 
