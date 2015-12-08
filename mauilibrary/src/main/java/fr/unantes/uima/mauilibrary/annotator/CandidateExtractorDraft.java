@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
@@ -20,16 +21,20 @@ import com.entopix.maui.util.Candidate;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
+import fr.unantes.uima.mauilibrary.types.CandidateAnnotation;
 import fr.unantes.uima.mauilibrary.types.LineAnnotation;
 import fr.unantes.uima.mauilibrary.types.PhraseAnnotation;
 
+
 /**
- * TODO 
- * @author solenee
+ * TODO Split into PhraseAnnotator + CandidateExtractor
+ * @see MauiFilter.getCandidates(String text)
+ * @author Solène
  *
  */
-public class PhraseAnnotator extends JCasAnnotator_ImplBase{
+public class CandidateExtractorDraft extends JCasAnnotator_ImplBase {
 
+	
 	/**
 	 * The minimum number of occurences of a phrase
 	 */
@@ -111,6 +116,12 @@ public class PhraseAnnotator extends JCasAnnotator_ImplBase{
 	 */
 	@Override
 	public void process(JCas jCas) throws AnalysisEngineProcessException {
+		if (stopwords == null) {
+			System.out.println("Aie aie aie stopwords is null");
+		}
+		if (stemmer == null) {
+			System.out.println("Aie aie aie stemmer is null");
+		}
 		stopwords.setLanguage(jCas.getDocumentLanguage());
 		stemmer.setLanguage(jCas.getDocumentLanguage());
 		
@@ -188,6 +199,7 @@ public class PhraseAnnotator extends JCasAnnotator_ImplBase{
 							if (phrase != null) {
 								candidateNames.add(phrase);
 								PhraseAnnotation phraseA = new PhraseAnnotation(jCas);
+								phraseA.setStem(phrase);
 								phraseA.setBegin(start); //TODO Fix begin
 								phraseA.setEnd(end); // TODO Fix end
 								phraseA.addToIndexes();
@@ -254,10 +266,13 @@ public class PhraseAnnotator extends JCasAnnotator_ImplBase{
 				candidatesTable.remove(key);
 			} else {
 				candidate.normalize(totalFrequency, pos);
+				// Annotate
+				CandidateAnnotation cAnno = new CandidateAnnotation(jCas);
+				cAnno.setName(key);
+				cAnno.addToIndexes();
 			}
 		}
 
 	}
 				
-
 }

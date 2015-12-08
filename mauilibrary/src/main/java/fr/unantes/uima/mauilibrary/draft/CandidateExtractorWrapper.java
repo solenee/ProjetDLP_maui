@@ -1,4 +1,4 @@
-package fr.unantes.uima.mauilibrary.annotator;
+package fr.unantes.uima.mauilibrary.draft;
 
 import java.util.HashMap;
 import java.util.List;

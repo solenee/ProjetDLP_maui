@@ -1,8 +1,8 @@
 package fr.unantes.uima.mauilibrary.nativeTests;
 
-import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
@@ -10,34 +10,13 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.junit.Test;
 
-import com.entopix.maui.filters.MauiFilter;
-import com.entopix.maui.main.MauiModelBuilder;
-import com.entopix.maui.main.MauiTopicExtractor;
-import com.entopix.maui.stemmers.FrenchStemmer;
-import com.entopix.maui.stemmers.Stemmer;
-import com.entopix.maui.stopwords.Stopwords;
-import com.entopix.maui.stopwords.StopwordsFrench;
-import com.entopix.maui.util.DataLoader;
-
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
-import fr.unantes.uima.mauilibrary.annotator.CandidateExtractorWrapper;
-import fr.unantes.uima.mauilibrary.annotator.CandidateExtractor_TF;
-import fr.unantes.uima.mauilibrary.annotator.Classifier_ImplBase;
-import fr.unantes.uima.mauilibrary.draft.CandidateExtractorDraft;
-import fr.unantes.uima.mauilibrary.model.ModelBuilderUIMA;
-import fr.unantes.uima.mauilibrary.notworking.KeyphraseExtractor;
+import fr.unantes.uima.mauilibrary.draft.CandidateExtractorWrapper;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
-import fr.unantes.uima.mauilibrary.reader.ManualTopicsReader;
-import fr.unantes.uima.mauilibrary.resource.MauiFilterResource;
 import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
-import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource_MauiImpl;
-import fr.unantes.uima.mauilibrary.resource.TopicBag_Impl;
 import fr.unantes.uima.mauilibrary.tokenizer.LineSplitter;
 import fr.unantes.uima.mauilibrary.tokenizer.WhitespaceTokenizer;
 import fr.unantes.uima.mauilibrary.writer.SyntaxicAnnotationWriter;
-import fr.unantes.uima.mauilibrary.writer.TopicWriter;
 
 /**
  * 

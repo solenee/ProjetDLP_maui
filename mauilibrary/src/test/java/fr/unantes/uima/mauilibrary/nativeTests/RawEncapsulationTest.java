@@ -10,15 +10,11 @@ import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ExternalResourceDescription;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import fr.unantes.uima.mauilibrary.model.ModelBuilderUIMA;
-import fr.unantes.uima.mauilibrary.notworking.KeyphraseExtractor;
 import fr.unantes.uima.mauilibrary.reader.DocumentsReader;
 import fr.unantes.uima.mauilibrary.reader.ManualTopicsReader;
-import fr.unantes.uima.mauilibrary.resource.MauiFilterResource;
 import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource_MauiImpl;
-import fr.unantes.uima.mauilibrary.resource.TopicBag_Impl;
 
 /**
  * Based on Maui FrenchExampleTest
@@ -100,18 +96,8 @@ public class RawEncapsulationTest {
 	                DocumentsReader.class,  DocumentsReader.PARAM_DIRECTORY_NAME, trainDir 
 	        );
 		AnalysisEngine manualTopicsReader = createEngine(ManualTopicsReader.class);
-		ExternalResourceDescription mainFilterResourceDesc =
-				createExternalResourceDescription(MauiFilterResource.class,"xx");
-		ExternalResourceDescription allTopicsResourceDesc =
-				createExternalResourceDescription(TopicBag_Impl.class,"xx");
-		AnalysisEngine stanfordSegmenter = createEngine(StanfordSegmenter.class);
 		String cutOffTopicProbability = "0.0"; // TODO Find default value in Maui code
 		int topicsPerDocument = 8;
-		AnalysisEngine keyphraseExtractor = createEngine(KeyphraseExtractor.class,
-				KeyphraseExtractor.RES_FILTER, mainFilterResourceDesc,
-				KeyphraseExtractor.RES_ALL_TOPICS, allTopicsResourceDesc,
-				KeyphraseExtractor.CUT_OFF_TOPIC_PROBABILITY, cutOffTopicProbability,
-				KeyphraseExtractor.TOPIC_PER_DOCUMENT, topicsPerDocument);
 		AnalysisEngine uimaModelBuilder = createEngine(ModelBuilderUIMA.class, 
 				ModelBuilderUIMA.INPUT_DIRECTORY_NAME,trainDir,
 				ModelBuilderUIMA.MODEL_NAME,modelName,
