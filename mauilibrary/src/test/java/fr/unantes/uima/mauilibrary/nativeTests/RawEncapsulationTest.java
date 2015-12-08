@@ -27,7 +27,7 @@ import fr.unantes.uima.mauilibrary.resource.TopicBag_Impl;
  */
 public class RawEncapsulationTest {
 
-	//@Test
+	@Test
 	public void testFrench() throws Exception {
 		
 		// location of the data
@@ -78,11 +78,11 @@ public class RawEncapsulationTest {
 		
 		// Which features to use?
 		Boolean basicFeatures = true;
-		Boolean keyphrasenessFeature = true;
-		Boolean frequencyFeatures = false;  
-		Boolean positionsFeatures = true;   
+		Boolean keyphrasenessFeature = false; //true;
+		Boolean frequencyFeatures = true; //false;  
+		Boolean positionsFeatures = false; //true;   
 		Boolean lengthFeature = true;       
-		Boolean thesaurusFeatures = true;   
+		Boolean thesaurusFeatures = false; //true;   
 //		modelBuilder.setBasicFeatures(true);
 //		modelBuilder.setKeyphrasenessFeature(true);
 //		modelBuilder.setFrequencyFeatures(false);

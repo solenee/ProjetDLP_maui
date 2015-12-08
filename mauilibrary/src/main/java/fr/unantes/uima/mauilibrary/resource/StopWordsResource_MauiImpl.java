@@ -53,7 +53,7 @@ public class StopWordsResource_MauiImpl implements StopWordsResource, SharedReso
 			this.language = language;
 			mauiStopwords = StopwordsFactory.makeStopwords(language);
 		}
-		
+		logger.log(Level.INFO, "language == "+language);
 	}
 
 }

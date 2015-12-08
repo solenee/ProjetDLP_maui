@@ -31,7 +31,7 @@ public class ManualTopicsReaderV0 extends JCasAnnotator_ImplBase {
 			manualTopics = "";
 			logger.log(Level.ALL,
 					"Error while loading "+ keyFileAbsolutePath + "document : " + e.getMessage());
-			throw new RuntimeException();
+			//throw new RuntimeException();
 		}
 		return manualTopics;
 	}
@@ -43,7 +43,8 @@ public class ManualTopicsReaderV0 extends JCasAnnotator_ImplBase {
 				FileDescription.class)) {
 			// should have 0 or 1 element
 			// XXX 
-			fDesc.setManualTopics(getManualTopics(fDesc.getAbsolutePath().replace(".txt", ".key")));
+			//fDesc.setManualTopics(getManualTopics(fDesc.getAbsolutePath().replace(".txt", ".key")));
+			fDesc.setAbsolutePath(getManualTopics(fDesc.getAbsolutePath().replace(".txt", ".key")));
 		}
 
 	}

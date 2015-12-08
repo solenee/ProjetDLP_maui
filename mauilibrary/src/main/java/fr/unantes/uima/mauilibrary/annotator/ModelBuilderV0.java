@@ -46,7 +46,9 @@ public class ModelBuilderV0 extends JCasAnnotator_ImplBase {
 	public void initialize(UimaContext context)
 			throws ResourceInitializationException {
 		super.initialize(context);
-		extractionModel.initializeModel(documentLanguage, stemmer.getMauiStemmer(), stopwords.getMauiStopwords());
+		stemmer.setLanguage(documentLanguage); // don't forget!!
+		stopwords.setLanguage(documentLanguage);// don't forget!!
+		extractionModel.initializeModelForTraining(documentLanguage, stemmer.getMauiStemmer(), stopwords.getMauiStopwords());
 	}
 	
 	@Override
@@ -56,7 +58,7 @@ public class ModelBuilderV0 extends JCasAnnotator_ImplBase {
 		for (FileDescription fDesc : JCasUtil.select(jCas, FileDescription.class)) {
 			// should have 1 element
 			filename = fDesc.getFileName();
-			manualTopicsText = fDesc.getManualTopics(); // XXX
+			manualTopicsText = fDesc.getAbsolutePath(); //getManualTopics(); // XXX
 		}
 		extractionModel.addDocumentToModel(filename, jCas.getDocumentText(), manualTopicsText);
 	}

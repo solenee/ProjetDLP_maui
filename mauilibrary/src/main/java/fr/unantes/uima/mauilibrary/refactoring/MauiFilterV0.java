@@ -2,12 +2,15 @@ package fr.unantes.uima.mauilibrary.refactoring;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,7 @@ import weka.core.Instances;
 import com.entopix.maui.filters.MauiFilter;
 import com.entopix.maui.stemmers.Stemmer;
 import com.entopix.maui.stopwords.Stopwords;
+import com.entopix.maui.util.DataLoader;
 import com.entopix.maui.util.Topic;
 import com.entopix.maui.vocab.Vocabulary;
 
@@ -55,19 +59,17 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 		atts.addElement(new Attribute("document", (FastVector) null));
 		atts.addElement(new Attribute("keyphrases", (FastVector) null));
 		data = new Instances("keyphrase_training_data", atts, 0);
-		model.setInputFormat(data);
 	}
 
 	// -----------------------------------------
 	// Step 1 : Build model
-	public boolean initializeModel(String documentLanguage, Stemmer stemmer,
+	public boolean initializeModelForTraining(String documentLanguage, Stemmer stemmer,
 			Stopwords stopwords) {
 		boolean done = false;
 		logger.log(Level.INFO, "-- Building the model... ");
 
 		try {
-			initializeData();
-
+			
 			model.setMaxPhraseLength(maxPhraseLength);
 			model.setMinPhraseLength(minPhraseLength);
 			model.setMinNumOccur(minNumOccur);
@@ -75,6 +77,9 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 			model.setStopwords(stopwords);
 			model.setDocumentLanguage(documentLanguage);
 			initializeVocabulary(vocabularyName, "", null);
+			
+			initializeData();
+			model.setInputFormat(data); // don't forget !!
 
 			// set features configurations
 			model.setBasicFeatures(true);
@@ -100,7 +105,7 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 		model.setVocabulary(vocabulary);
 	}
 
-	// OK
+	
 	public boolean addDocumentToModel(String filename, String documentText,
 			String manualTopicsText) {
 		boolean done = false;
@@ -169,6 +174,26 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 
 	// -----------------------------------------
 	// Step 2 : Extract topics
+	
+	public boolean initializeModelForTesting(String documentLanguage,
+			Stemmer stemmer, Stopwords stopwords) {
+		boolean done = false;
+		try {
+			model.setStemmer(stemmer);
+			model.setStopwords(stopwords);
+			model.setDocumentLanguage(documentLanguage);
+			initializeVocabulary(vocabularyName, "", null);
+			//model.globalDictionary = null; // because we want to compute TFxIDF
+											// values
+			initializeData();
+			done = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return done;
+	}
+
+	
 	public boolean loadModel(String modelName) {
 		boolean done = false;
 		try {
@@ -212,29 +237,24 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 
 			Instance[] topRankedInstances = new Instance[topicsPerDocument];
 
-			// MauiTopics documentTopics = new
-			// MauiTopics(document.getFilePath());
-			// documentTopics.setPossibleCorrect(document.getTopicsString().split("\n").length);
-
 			Instance inst;
 			int index = 0;
 			double probability;
 			Topic topic;
 			String title, id;
 
-			logger.log(Level.INFO, "-- Keyphrases and feature values:");
+			logger.log(Level.INFO, "-- Keyphrases and feature values: "+model.numPendingOutput());
 
 			// Iterating over all extracted topic instances
 			while ((inst = model.output()) != null) {
 				probability = inst.value(model.getProbabilityIndex());
+				//System.out.println("Probability : "+probability);
 				if (index < topicsPerDocument) {
 					if (probability > cutOffTopicProbability) {
 						topRankedInstances[index] = inst;
 						title = topRankedInstances[index].stringValue(model
 								.getOutputFormIndex());
-						id = "1"; // topRankedInstances[index].
-						// stringValue(mauiFilter.getOutputFormIndex() + 1); //
-						// TODO: Check
+						id = "1"; 
 						topic = new Topic(title, id, probability);
 
 						if ((int) topRankedInstances[index]
@@ -274,26 +294,23 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 
 	public void load(DataResource aData) throws ResourceInitializationException {
 		// TODO Load from file : loadModel(modelName)
-		/*InputStream inStream = null;
-		if (aData == null) {
-			return;
-		}
+		InputStream inStream = null;
 		try {
-			inStream = aData.getInputStream(); // new BufferedInputStream(new
-												// FileInputStream(modelPath));
+			URI uri = aData.getUri();
+			System.out.println("Uri : "+uri.getPath());
+			inStream = aData.getInputStream();
 			ObjectInputStream in = new ObjectInputStream(inStream);
 			model = (MauiFilter) in.readObject();
 			in.close();
-			inStream.close();
-
-		} catch (IOException e) {
-			logger.log(Level.WARNING,
-					"Error while loading extraction model. Make sure you are at trainig phase");
+			logger.log(Level.INFO,
+					uri.getPath() +" loaded");
 		} catch (ClassNotFoundException e) {
 			logger.log(Level.SEVERE, "Mismatch of the class !\n", e);
 			throw new ResourceInitializationException();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.log(Level.WARNING,
+					"Error while loading extraction model. Make sure you are at training phase");
 		} finally {
 			try {
 				if (inStream != null) {
@@ -301,11 +318,9 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 				}
 			} catch (Exception e1) {
 				logger.log(Level.SEVERE,
-						"Error while loading extraction model !\n", e1);
-				// throw new RuntimeException();
+						"Error while loading extraction model !\n");
 			}
 		}
-		*/
 	}
 
 }

@@ -23,7 +23,7 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 	@ConfigurationParameter(name = PARAM_LANGUAGE,
 			description = "default language for the text",
 			mandatory = false, defaultValue = "en")*/
-	private String language = "en";
+	private String language;
 	
 	/** Maui Stemmer object */
 	private Stemmer mauiStemmer;
@@ -47,7 +47,9 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 	}
 	
 	private void initStemmer() {
-		if (language.equals("en")) {
+		if (language == null) {
+			mauiStemmer = new NoStemmer();
+		} else if (language.equals("en")) {
 			mauiStemmer = new PorterStemmer();
 		} else if (language.equals("fr")) {
 			mauiStemmer = new FrenchStemmer();

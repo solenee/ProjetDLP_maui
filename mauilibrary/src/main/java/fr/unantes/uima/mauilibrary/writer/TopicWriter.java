@@ -39,6 +39,7 @@ public class TopicWriter extends JCasAnnotator_ImplBase {
 			super.initialize(context);
 			stringbuffer = new StringBuffer(); 
 		}
+		
 		@Override
 		public void process(JCas aJCas) throws AnalysisEngineProcessException {
 			String filename = null;
@@ -64,7 +65,7 @@ public class TopicWriter extends JCasAnnotator_ImplBase {
 	            bw.write(stringbuffer.toString());
 	            bw.close();
 	
-	           logger.log(Level.INFO, "File create "+resourceDestFilename);
+	           logger.log(Level.INFO, "File created "+resourceDestFilename);
 	
 	        } catch (IOException e) {
 	            e.printStackTrace();

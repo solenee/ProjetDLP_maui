@@ -68,7 +68,7 @@ import weka.classifiers.meta.Bagging;
 public interface MauiFilter_UIMA extends SharedResourceObject {
 	
 	// Step 1 : Build model (initialize classifier)
-	public boolean initializeModel(String documentLanguage, Stemmer stemmer, Stopwords stopwords);
+	public boolean initializeModelForTraining(String documentLanguage, Stemmer stemmer, Stopwords stopwords);
 	
 	public boolean addDocumentToModel(String filename, String documentText, String manualTopicsText);
 	
@@ -77,6 +77,8 @@ public interface MauiFilter_UIMA extends SharedResourceObject {
 	public boolean save(String modelName);
 	
 	// Step 2 : Test
+	public boolean initializeModelForTesting(String documentLanguage, Stemmer stemmer, Stopwords stopwords);
+	
 	public boolean loadModel(String modelName);
 	
 	public List<Topic> extractTopics(String filename, String documentText,
