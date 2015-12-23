@@ -22,10 +22,9 @@ import fr.unantes.uima.mauilibrary.types.FileDescription;
 import fr.unantes.uima.mauilibrary.types.ManualTopic;
 
 /**
- * TODO : Index nbDocuments somehow : in MauiFilter resource
  * Note : The model is just a serialized version of MauiFilter object (version Maui)
  * Collection reader for loading all txt files of a given directory
- * It also add the following pieces of information : FileDescription, ManualTopics 
+ * It also add the following pieces of information : FileDescription annotation (absolutePath, fileName) 
  * Maui : Refactoring of DataLoader
  * @author solenee
  *
@@ -74,7 +73,7 @@ public class DocumentsReader extends JCasCollectionReader_ImplBase {
 		String s = FileUtils.readFileToString(f);
 		jcas.setDocumentText(s);
 		jcas.setDocumentLanguage(documentLanguage);
-		// Initialize FileDescription
+		// Initialize FileDescription annotation
 		FileDescription fDesc = new FileDescription(jcas);
 		fDesc.setAbsolutePath(f.getAbsolutePath());
 		fDesc.setFileName(f.getName());

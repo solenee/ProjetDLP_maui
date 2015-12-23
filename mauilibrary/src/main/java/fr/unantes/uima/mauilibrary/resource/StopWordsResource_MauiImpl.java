@@ -15,6 +15,9 @@ import com.entopix.maui.stopwords.StopwordsFactory;
 
 
 /**
+ * Adapts Maui Stopwords into a UIMA resource via encapsultation. 
+ * The Maui Stopwords object is created according to the language. 
+ * Supported languages : de, en, es, fr 
  * @see StopWordsResource
  * @author solenee
  *
@@ -40,6 +43,7 @@ public class StopWordsResource_MauiImpl implements StopWordsResource, SharedReso
 	public boolean isWord(String key) {
 		return Pattern.matches("(\\w|à|â|ä|é|è|ê|ë|î|ï|ô|ö|û|ü|ç)+", key);
 	}
+	
 	public Boolean isStopword(String key) {
 		return mauiStopwords.isStopword(key) || (!isWord(key));
 	}
@@ -48,6 +52,9 @@ public class StopWordsResource_MauiImpl implements StopWordsResource, SharedReso
 		return mauiStopwords;
 	}
 
+	/**
+	 * Set language and modify the Maui Stopwords object accordingly if needed
+	 */
 	public void setLanguage(String language) {
 		if (this.language == null || (mauiStopwords == null) || (this.language != language)) {
 			this.language = language;

@@ -14,6 +14,12 @@ import org.apache.uima.util.Logger;
 
 import fr.unantes.uima.mauilibrary.types.FileDescription;
 
+/**
+ * Load manual topics for a given file. They should be stored one per line in a .key file 
+ * named following the field getAbsolutePath() of the corresponding FileDescription annotation
+ * @author solenee
+ *
+ */
 public class ManualTopicsReaderV0 extends JCasAnnotator_ImplBase {
 
 	Logger logger = UIMAFramework.getLogger(ManualTopicsReaderV0.class);
@@ -25,7 +31,7 @@ public class ManualTopicsReaderV0 extends JCasAnnotator_ImplBase {
 			if (keyFile.exists()) {
 				manualTopics = FileUtils.readFileToString(keyFile);
 			} else {
-				logger.log(Level.INFO, "No key file found for "+keyFileAbsolutePath.replace(".key", ".txt"));
+				logger.log(Level.INFO, "No key file found for "+keyFileAbsolutePath.replace(".key", ""));
 			}
 		} catch (IOException e) {
 			manualTopics = "";
@@ -44,7 +50,7 @@ public class ManualTopicsReaderV0 extends JCasAnnotator_ImplBase {
 			// should have 0 or 1 element
 			// XXX 
 			//fDesc.setManualTopics(getManualTopics(fDesc.getAbsolutePath().replace(".txt", ".key")));
-			fDesc.setAbsolutePath(getManualTopics(fDesc.getAbsolutePath().replace(".txt", ".key")));
+			fDesc.setAbsolutePath(getManualTopics(fDesc.getAbsolutePath().replace(".txt", "")+".key"));
 		}
 
 	}

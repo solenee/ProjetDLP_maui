@@ -11,6 +11,7 @@ import com.entopix.maui.vocab.Vocabulary.VocabularyException;
 import com.hp.hpl.jena.rdf.model.Model;
 
 /**
+ * NOT USED IN VERSION 1.0 (CURRENT VERSION)
  * Interface which models the vocabulary list ;
  * Builds an index with the content of the controlled vocabulary.
  * Accepts vocabularies as rdf files (SKOS format) and in plain text format:

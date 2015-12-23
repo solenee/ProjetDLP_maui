@@ -15,6 +15,16 @@ import com.entopix.maui.stemmers.PorterStemmer;
 import com.entopix.maui.stemmers.SpanishStemmer;
 import com.entopix.maui.stemmers.Stemmer;
 
+/**
+ * Encapsulates a Maui Stemmer created according to the language :
+ * en : PorterStemmer
+ * fr : FrenchStemmer
+ * es : SpanishStemmer
+ * de : GermanStemmer
+ * other : NoStemmer
+ * @author solenee
+ *
+ */
 public class StemmerResource_MauiImpl implements StemmerResource, SharedResourceObject{
 
 	Logger logger = UIMAFramework.getLogger(StemmerResource_MauiImpl.class);
@@ -34,13 +44,16 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 		initStemmer();
 	}
 
+	/**
+	 * Returns the stem of the given string
+	 */
 	public String stem(String str) {
 		return mauiStemmer.stem(str);
 	}
 	
 	/**
 	 * Get Maui Stemmer object
-	 * @return mauiStemmer
+	 * @return mauiStemmer; null if this.language is not supported
 	 */
 	public Stemmer getMauiStemmer() {
 		return mauiStemmer;
@@ -62,6 +75,9 @@ public class StemmerResource_MauiImpl implements StemmerResource, SharedResource
 		}
 	}
 
+	/**
+	 * Set language and modify the stemmer accordingly if needed
+	 */
 	public void setLanguage(String language) {
 		if ((this.language == null) || (this.language != language)) {
 			this.language = language;

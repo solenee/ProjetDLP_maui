@@ -10,8 +10,7 @@ import java.util.List;
 import com.entopix.maui.stopwords.Stopwords;
 
 /**
- * Interface which models the stop word list ; 
- * Declare the methods handled by the annotators to access the resource
+ * Interface modeling a stopwords identifier ; 
  * @author solenee 
  */
 public interface StopWordsResource {

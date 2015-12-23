@@ -1,7 +1,7 @@
 package fr.unantes.uima.mauilibrary.resource;
 
 /**
- * Interface modelling a stemmer  
+ * Interface modeling a stemmer  
  * @author solenee
  *
  */

@@ -1,16 +1,12 @@
 package fr.unantes.uima.mauilibrary.refactoring;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +24,14 @@ import weka.core.Instances;
 import com.entopix.maui.filters.MauiFilter;
 import com.entopix.maui.stemmers.Stemmer;
 import com.entopix.maui.stopwords.Stopwords;
-import com.entopix.maui.util.DataLoader;
 import com.entopix.maui.util.Topic;
 import com.entopix.maui.vocab.Vocabulary;
 
+/**
+ * Adapts MauiFilter into a UIMA resource via Encapsulation
+ * @author solenee
+ *
+ */
 public class MauiFilterV0 implements MauiFilter_UIMA {
 
 	Logger logger = UIMAFramework.getLogger(MauiFilter.class);
@@ -293,7 +293,6 @@ public class MauiFilterV0 implements MauiFilter_UIMA {
 	}
 
 	public void load(DataResource aData) throws ResourceInitializationException {
-		// TODO Load from file : loadModel(modelName)
 		InputStream inStream = null;
 		try {
 			URI uri = aData.getUri();

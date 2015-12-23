@@ -23,6 +23,11 @@ import fr.unantes.uima.mauilibrary.types.FileDescription;
 import fr.unantes.uima.mauilibrary.types.TopicAnnotation;
 import fr.unantes.uima.mauilibrary.utils.CandidatesComparator;
 
+/**
+ * Extract topics using the MauiFilter extraction model loaded in the resource RES_MODEL 
+ * @author solenee
+ *
+ */
 public class TopicExtractorV0 extends JCasAnnotator_ImplBase {
 
 	public static final String DOCUMENT_LANGUAGE = "DOCUMENT_LANGUAGE";
@@ -42,8 +47,10 @@ public class TopicExtractorV0 extends JCasAnnotator_ImplBase {
 	@ExternalResource(key = RES_MODEL)
 	private MauiFilter_UIMA extractionModel;
 	
-	//TODO Define as parameter
-	private int topicsPerDocument = 10;
+	public static final String TOPICS_PER_DOCUMENT = "TOPICS_PER_DOCUMENT";
+	@ConfigurationParameter(name = TOPICS_PER_DOCUMENT,
+			mandatory = false, defaultValue = "10")
+	private int topicsPerDocument;
 	
 	@Override
 	public void initialize(UimaContext context)
@@ -70,7 +77,7 @@ public class TopicExtractorV0 extends JCasAnnotator_ImplBase {
 		Collections.sort(candidates, new CandidatesComparator());
 		for (Topic elected : topics) {
 			TopicAnnotation tAnno = new TopicAnnotation(jCas);
-			tAnno.setText(elected.getTitle()); //TODO test with getTitle
+			tAnno.setText(elected.getTitle()); 
 			tAnno.setScore(elected.getProbability());
 			tAnno.addToIndexes();
 		}

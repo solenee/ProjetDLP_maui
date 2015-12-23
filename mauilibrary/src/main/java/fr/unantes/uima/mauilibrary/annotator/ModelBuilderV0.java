@@ -17,6 +17,11 @@ import fr.unantes.uima.mauilibrary.resource.StemmerResource_MauiImpl;
 import fr.unantes.uima.mauilibrary.resource.StopWordsResource;
 import fr.unantes.uima.mauilibrary.types.FileDescription;
 
+/**
+ * Build extraction model using a MauiFilter
+ * @author solenee
+ *
+ */
 public class ModelBuilderV0 extends JCasAnnotator_ImplBase {
 
 	public static final String DOCUMENT_LANGUAGE = "DOCUMENT_LANGUAGE";
@@ -58,7 +63,7 @@ public class ModelBuilderV0 extends JCasAnnotator_ImplBase {
 		for (FileDescription fDesc : JCasUtil.select(jCas, FileDescription.class)) {
 			// should have 1 element
 			filename = fDesc.getFileName();
-			manualTopicsText = fDesc.getAbsolutePath(); //getManualTopics(); // XXX
+			manualTopicsText = fDesc.getAbsolutePath(); //getManualTopics(); // XXX 
 		}
 		extractionModel.addDocumentToModel(filename, jCas.getDocumentText(), manualTopicsText);
 	}
