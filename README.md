@@ -10,8 +10,8 @@ What is it?
   framework. This library automatically identifies keyphrases in 
   documents. It is meant for terminology extraction and semi-automatic
   topic indexing. It supports English, French, German and Spanish.
-  As an academic project developed in a short period of time, it is
-  not meant to fully integrate Maui Library but to provide a working
+  As an academic project developed in a short period of time, our work is
+  not meant to fully integrate Maui library but to provide a working
   integration of the main functionalities of Maui.
 
 
