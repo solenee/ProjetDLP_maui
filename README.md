@@ -36,8 +36,8 @@ Integrated functionalities
   * Keyphrases extraction for a test set of documents (.txt files)
   using the extraction model trained during the first step
   
-Each step has been adapt into a UIMA pipeline (see MauiPipelines class) 
-with chosen Maui configuration parameters (see MauiFilterV0 class).
+Each step has been adapt into a UIMA pipeline (see [MauiPipelines](https://github.com/solenee/ProjetDLP_maui/tree/v00/mauilibrary/src/main/java/fr/unantes/uima/mauilibrary/pipeline) class) 
+with chosen Maui configuration parameters (see [MauiFilterV0](https://github.com/solenee/ProjetDLP_maui/blob/v00/mauilibrary/src/main/java/fr/unantes/uima/mauilibrary/refactoring/MauiFilterV0.java) class).
   
 Note that the use of a thesaurus (controlled vocabulary) is not yet supported.
   
