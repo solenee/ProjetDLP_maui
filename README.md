@@ -25,13 +25,15 @@ Documentation
 Installation
 ------------
 
-  You need Eclipse (Luna preferably) with Maven and UIMA plugins.
+  You'll need Eclipse (Luna preferably) with Maven and UIMA plugins.
+  Check out the repository and import the project in Eclipse as Maven
+  project.
 
 
 Integrated functionalities
 -----------------------------
   Maui works in two steps : 
-  * Extration model building using a training test of documents (.txt files) 
+  * Extraction model building using a training test of documents (.txt files) 
   with associated manual topics (.key files)
   * Keyphrases extraction for a test set of documents (.txt files)
   using the extraction model trained during the first step
@@ -41,7 +43,7 @@ with chosen Maui configuration parameters (see [MauiFilterV0](https://github.com
   
 Note that the use of a thesaurus (controlled vocabulary) is not yet supported.
   
-By launching TestFunctionalCorrectness JUnit test, you can check by
+Using TestFunctionalCorrectness JUnit test, you can check by
 yourself that for the chosen parameters, our encapsulation and Maui
 native library yield the same results.
   
@@ -50,7 +52,7 @@ in a customed way if you don't want to store the documents as txt
 files in the same directory. You can design your own CollectionReader to
 perform the reading task as long as it respects the following requirements :
   * set the JCas document language
-  * set the JCas document text. For a given document, it should be the 
+  * set the JCas document text : for a given document, it should be the 
   text to analyze (we want to process one document per JCas)
   * create a FileDescription annotation per document to analyze, 
   initialize its "fileName" field with the file ID and its "absolutePath"
@@ -59,8 +61,8 @@ perform the reading task as long as it respects the following requirements :
   if you don't provide any manual topics file), index the annotation
   
 This will ensure that the rest of each pipeline works correctly.
-TestInputDocuments JUnit is an example for extracting keyphrases 
-for a web page. 
+TestInputDocuments JUnit test is an example for extracting keyphrases 
+from a web page. 
   
 We provide a method in MauiPipelines to use a customed CollectionReader
 in the extraction pipeline. 
