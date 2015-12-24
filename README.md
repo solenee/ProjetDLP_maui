@@ -1,9 +1,9 @@
 # ProjetDLP_maui (GPL)
 
-  Version 1.0 23/12/2015
+Version 1.0 23/12/2015
   
 What is it?
-  -----------
+-----------
 
   This work is an academic project proposing an integration of 
   [Maui library](https://github.com/zelandiya/maui) in Apache UIMA 
@@ -16,20 +16,20 @@ What is it?
 
 
 Documentation
-  -------------
+-------------
 
   All classes have a javadoc documentation please check them for 
   detailled information.
 
 
 Installation
-  ------------
+------------
 
   You need Eclipse (Luna preferably) with Maven and UIMA plugins.
 
 
 Integrated functionalities
-  -----------------------------
+-----------------------------
   Maui works in two steps : 
   * Extration model building using a training test of documents (.txt files) 
   with associated manual topics (.key files)
