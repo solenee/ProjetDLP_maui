@@ -14,28 +14,33 @@
   not meant to fully integrate Maui Library but to provide a working
   integration of the main functionalities of Maui.
 
+
   Documentation
   -------------
 
   All classes have a javadoc documentation please check them for 
   detailled information.
 
+
   Installation
   ------------
 
   You need Eclipse (Luna preferably) with Maven and UIMA plugins.
 
+
   Integrated functionalities
   -----------------------------
   Maui works in two steps : 
-  1- Extration model building using a training test of documents (.txt files) 
+  *Extration model building using a training test of documents (.txt files) 
   with associated manual topics (.key files)
-  2- Keyphrases extraction for a test set of documents (.txt files)
+  * Keyphrases extraction for a test set of documents (.txt files)
   using the extraction model trained during the first step
   
   Each step has been adapt into a UIMA pipeline (see MauiPipelines class) 
   with chosen Maui configuration parameters (see MauiFilterV0 class).
+  
   Note that the use of a thesaurus (controlled vocabulary) is not yet supported.
+  
   By launching TestFunctionalCorrectness JUnit test, you can check by
   yourself that for the chosen parameters, our encapsulation and Maui
   native library yield the same results.
@@ -52,20 +57,24 @@
   field with the file path necessary to find the corresponding .key file
   (don't mention the .key extension; you might leave the field empty
   if you don't provide any manual topics file), index the annotation
-  This will ensure that the rest of each pipeline works correctly.
-  TestInputDocuments JUnit is an example for extracting keyphrases 
-  for a web page. 
-  We provide a method in MauiPipelines to use a customed CollectionReader
-  in the extraction pipeline. 
   
-  Warnings
-  --------
-  Please do not use the field "absolutePath" of FileDescription 
-  annotation after its processing by the analysis engine 
-  ManualTopicsReaderV0.
+This will ensure that the rest of each pipeline works correctly.
+TestInputDocuments JUnit is an example for extracting keyphrases 
+for a web page. 
   
-  Contacts
-  --------
+We provide a method in MauiPipelines to use a customed CollectionReader
+in the extraction pipeline. 
+  
+  
+Warnings
+--------
+Please do not use the field "absolutePath" of FileDescription 
+annotation after its processing by the analysis engine 
+ManualTopicsReaderV0.
+  
+
+Contacts
+--------
 
      o If you want to be informed about new code releases and bug fixes
        please subscribe to the repository
