@@ -2,7 +2,7 @@
 
   Version 1.0 23/12/2015
   
-  What is it?
+What is it?
   -----------
 
   This work is an academic project proposing an integration of 
@@ -15,40 +15,40 @@
   integration of the main functionalities of Maui.
 
 
-  Documentation
+Documentation
   -------------
 
   All classes have a javadoc documentation please check them for 
   detailled information.
 
 
-  Installation
+Installation
   ------------
 
   You need Eclipse (Luna preferably) with Maven and UIMA plugins.
 
 
-  Integrated functionalities
+Integrated functionalities
   -----------------------------
   Maui works in two steps : 
-  *Extration model building using a training test of documents (.txt files) 
+  * Extration model building using a training test of documents (.txt files) 
   with associated manual topics (.key files)
   * Keyphrases extraction for a test set of documents (.txt files)
   using the extraction model trained during the first step
   
-  Each step has been adapt into a UIMA pipeline (see MauiPipelines class) 
-  with chosen Maui configuration parameters (see MauiFilterV0 class).
+Each step has been adapt into a UIMA pipeline (see MauiPipelines class) 
+with chosen Maui configuration parameters (see MauiFilterV0 class).
   
-  Note that the use of a thesaurus (controlled vocabulary) is not yet supported.
+Note that the use of a thesaurus (controlled vocabulary) is not yet supported.
   
-  By launching TestFunctionalCorrectness JUnit test, you can check by
-  yourself that for the chosen parameters, our encapsulation and Maui
-  native library yield the same results.
+By launching TestFunctionalCorrectness JUnit test, you can check by
+yourself that for the chosen parameters, our encapsulation and Maui
+native library yield the same results.
   
-  In addition, we allow to read the training (resp. test) set of documents 
-  in a customed way if you don't want to store the documents as txt 
-  files in the same directory. You can design your own CollectionReader to
-  perform the reading task as long as it respects the following requirements :
+In addition, we allow to read the training (resp. test) set of documents 
+in a customed way if you don't want to store the documents as txt 
+files in the same directory. You can design your own CollectionReader to
+perform the reading task as long as it respects the following requirements :
   * set the JCas document language
   * set the JCas document text. For a given document, it should be the 
   text to analyze (we want to process one document per JCas)
